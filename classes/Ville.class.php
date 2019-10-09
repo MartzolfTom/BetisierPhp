@@ -1,7 +1,8 @@
 <?php
-  classVille {
-    private vil_num;
-    private vil_nom;
+class Ville {
+
+    private $vil_num;
+    private $vil_nom;
 
     public function __construct($valeurs = array()){
       if (!empty($valeurs)) {
