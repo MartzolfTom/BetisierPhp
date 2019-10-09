@@ -7,21 +7,20 @@
 		<title>
 		<?php echo $title ?>
 		</title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
- 
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
 </head>
 	<body>
 	<div id="header">
 		<div id="connect">
 
-		</div>	
+		</div>
 		<div id="entete">
 			<div id="logo">
-			
+
 			</div>
 			<div id="titre">
 				Le bétisier de l'IUT,<br />Partagez les meilleures perles !!!
 			</div>
 		</div>
 	</div>
-	

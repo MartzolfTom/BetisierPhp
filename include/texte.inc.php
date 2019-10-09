@@ -57,26 +57,23 @@ case 8:
 	include("pages/listerVilles.inc.php");
     break;
 
-//
-
-//
 case 9:
 	// inclure ici la page ....
     break;
 case 10:
 	// inclure ici la page....
     break;
-    
+
 case 11:
 	// inclure ici la page...
     break;
 
 case 12:
-	// inclure ici la page...
+include("pages/supprimerVille.inc.php");
     break;    
-    
+
 default : 	include_once('pages/accueil.inc.php');
 }
-	
+
 ?>
 </div>
