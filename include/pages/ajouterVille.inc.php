@@ -25,6 +25,6 @@ if (empty($_POST['vil_nom'])) {
     $ville = new Ville($tab);
 
     $manager->add($ville);
-    echo "Ville ajouté";
+    echo "La ville \"".$_POST['vil_nom']."\" a été ajouté";
 }
 ?>

@@ -4,7 +4,7 @@ $manager = new VilleManager($db);
 ?>
 
 	<h1>Liste des villes</h1>
-	<?php echo "Actuellement ".$manager->nbVille()." villes sont enregistrés"; ?>
+	<?php echo "Actuellement ".$manager->nbVille()." ville(s) sont enregistrée(s)"; ?>
 	<table>
    <tr>
      <th>Numero</th>
