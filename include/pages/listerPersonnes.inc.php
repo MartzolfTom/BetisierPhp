@@ -17,7 +17,7 @@ $listePersonnes = $manager->getListPersonnes	();
 foreach ($listePersonnes as $personne) {
     ?>
     <tr>
-      <td  onclick='' >  <?php echo $personne->getPerNum(); ?> </td>
+      <td >   <a href="index.php?page=15"> <?php echo $personne->getPerNum(); ?> </a> </td>
       <td> <?php echo $personne->getPerNom(); ?> </td>
 			<td> <?php echo $personne->getPerPrenom(); ?> </td>
     </tr>

@@ -81,6 +81,10 @@ switch ($page) {
             // inclure ici la page supprimer ville
             include "pages/connexion.inc.php";
             break;
+            case 15:
+                // inclure ici la page supprimer ville
+                include "pages/detailPersonne.inc.php";
+                break;
 
     default:include_once 'pages/accueil.inc.php';
 }

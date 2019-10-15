@@ -2,8 +2,8 @@
 $db = new Mypdo();
 $manager = new ConnexionManager($db);
 
-$nb_alea1=rand(1,20);
-$nb_alea2=rand(1,20);
+$nb_alea1 = rand(1, 20);
+$nb_alea2 = rand(1, 20);
 
 ?>
 
@@ -11,7 +11,7 @@ $nb_alea2=rand(1,20);
 
 <?php
 if (empty($_POST['nom'])) {
-?>
+    ?>
 
 <form action="#" method="post">
       Nom d'utilisateur : <input type="text" name="nom" value="tom"> <br/><br/>
@@ -24,13 +24,12 @@ if (empty($_POST['nom'])) {
 <?php
 } else {
 
-if( $manager->Login() == true){
-  echo "Vous avez bien été connecté !";
-  echo "<br /><br />";
-  echo "Redirection automatique dans 2 secondes";
+    if ($manager->Login() == true) {
+        echo "Vous avez bien été connecté !";
+        echo "<br /><br />";
+        echo "Redirection automatique dans 2 secondes";
+    } else {
+        echo "non déso";
+    }
 }
-else {
-  echo "non déso";
-}
-}
- ?>
+?>
