@@ -71,5 +71,23 @@ public function getDetailPersonne($per_num){
   }
 }
 
+public function getListEnseignant(){
+
+  $listeEnseignant=array();
+    $sql='SELECT per_nom FROM personne p join salarie s on p.per_num=s.per_num
+                                         join fonction f on f.fon_num=s.fon_num
+                                           WHERE fon_libelle=\'enseignant\'';
+
+  $req= $this->db->query($sql);
+
+  while ($personne = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeEnseignant[] = new Personne($personne);
+
+    return $listeEnseignant;
+    $req->closeCursor();
+
+}
+}
+
 }
  ?>

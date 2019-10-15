@@ -8,17 +8,11 @@ $manager = new VilleManager($db);
 <?php
 if (empty($_POST['vil_nom'])) {
     ?>
-  <table class="nobordered">
   <form method ="post" action ="#">
-  <tr>
-    <td> Nom</td>
-    <td><input type="text" name="vil_nom" value="Sarlat"/></td>
-  </tr>
-  <tr>
-    <td><input type="submit" name="Valider" /></td>
-  </tr>
-  </table>
 
+    Nom : <input type="text" name="vil_nom" value="Sarlat"/>
+        <input type="submit" name="Valider" />
+  </form>
 <?php } else {
 
     $tab = array('vil_nom' => $_POST['vil_nom']);
