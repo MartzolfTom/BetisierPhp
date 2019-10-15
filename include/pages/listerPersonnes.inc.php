@@ -17,7 +17,10 @@ $listePersonnes = $manager->getListPersonnes	();
 foreach ($listePersonnes as $personne) {
     ?>
     <tr>
-      <td >   <a href="index.php?page=15"> <?php echo $personne->getPerNum(); ?> </a> </td>
+      <td >   <a href="index.php?page=15
+											&per_num=<?php echo $personne->getPerNum(); ?>
+											&per_nom=<?php echo $personne->getPerNom(); ?> ">
+											<?php echo $personne->getPerNum(); ?> </a> </td>
       <td> <?php echo $personne->getPerNom(); ?> </td>
 			<td> <?php echo $personne->getPerPrenom(); ?> </td>
     </tr>

@@ -55,8 +55,20 @@ public function nbpersonnes(){
     return $donnees['nbpersonnes'];
 }
 
-public function detailEtu(){
-  echo "console.log('oui')"; 
+public function getDetailPersonne($per_num){
+
+  $detailPersonne =array();
+  $sql='SELECT per_prenom, per_mail , per_tel   FROM personne
+                                 WHERE per_num= '. $per_num .'';
+
+  $req= $this->db->query($sql);
+
+  while ($personne = $req->fetch(PDO::FETCH_OBJ)) {
+    $detailPersonne[] = new Personne($personne);
+
+    return $detailPersonne;
+    $req->closeCursor();
+  }
 }
 
 }
