@@ -7,10 +7,12 @@ public function __construct($db){
 }
 
 
-public function add($ville){
+public function ajouterEtudiant($etudiant){
   $req=$this->db->prepare(
-    'INSERT INTO ville ( vil_nom) VALUES(:nom)');
-    $req->bindValue(':nom',$ville->getVilNom(),PDO::PARAM_STR);
+    'INSERT INTO etudiant VALUES(:per_num, :dep_num, :div_num)');
+    $req->bindValue(':per_num',$etudiant->getPerNum(),PDO::PARAM_INT);
+    $req->bindValue(':dep_num',$etudiant->getDepNum(),PDO::PARAM_STR);
+    $req->bindValue(':div_num',$etudiant->getDivNum(),PDO::PARAM_STR);
 
     $req->execute();
 }

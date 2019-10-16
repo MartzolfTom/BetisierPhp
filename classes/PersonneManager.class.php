@@ -6,10 +6,15 @@ public function __construct($db){
   $this ->db=$db;
 }
 
-public function add($citation){
+public function ajouterPersonne($personne){
   $req=$this->db->prepare(
-    'INSERT INTO ville ( vil_nom) VALUES(:nom)');
-    $req->bindValue(':nom',$ville->getVilNom(),PDO::PARAM_STR);
+    'INSERT INTO personne (per_nom, per_prenom, per_tel, per_mail, per_admin, per_login, per_pwd) VALUES(:per_nom, :per_prenom, :per_tel, :per_mail, 0, :per_login, :per_pwd)');
+    $req->bindValue(':per_nom',$personne->getPerNom(),PDO::PARAM_STR);
+    $req->bindValue(':per_prenom',$personne->getPerPrenom(),PDO::PARAM_STR);
+    $req->bindValue(':per_tel',$personne->getPerTel(),PDO::PARAM_STR);
+    $req->bindValue(':per_mail',$personne->getPerMail(),PDO::PARAM_STR);
+    $req->bindValue(':per_login',$personne->getPerLogin(),PDO::PARAM_STR);
+    $req->bindValue(':per_pwd',$personne->getPerPwd(),PDO::PARAM_STR);
 
     $req->execute();
 }
