@@ -53,8 +53,8 @@ class Personne
 
 
     public static function hashPassword($p) {
-		define("SALT", "<b}DKJ{]1QIcgsl<-Ksp#ybnaP!{M@jlncCVntjhyEaN*WjhdfJXZ");
-		return sha1(SALT . md5($p . SALT) . sha1(SALT));
+		define("SALT", "48@!alsd");
+		return sha1(sha1($p) . SALT);
 	}
 
     public function getPerNum()

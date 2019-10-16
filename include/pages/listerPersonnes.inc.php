@@ -13,7 +13,7 @@ $manager = new PersonneManager($db);
   </tr>
   <?php
 
-$listePersonnes = $manager->getListPersonnes	();
+$listePersonnes = $manager->getListPersonnes();
 foreach ($listePersonnes as $personne) {
     ?>
     <tr>

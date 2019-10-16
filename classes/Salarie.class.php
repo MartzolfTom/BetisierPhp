@@ -28,9 +28,9 @@ class Salarie
                 case 'fon_num':
                     $this->setFonNum($valeur);
                     break;
-                    case 'fon_libelle':
-                        $this->setFonLibelle($valeur);
-                        break;
+                case 'fon_libelle':
+                    $this->setFonLibelle($valeur);
+                    break;
             }
         }
       }

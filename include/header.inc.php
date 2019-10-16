@@ -15,6 +15,7 @@
 		<div id="connect">
     <a href="index.php?page=14">Connexion</a>
 		</div>
+    
 		<div id="entete">
 			<div id="logo">
 

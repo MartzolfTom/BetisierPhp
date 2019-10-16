@@ -29,12 +29,12 @@ class Etudiant
                 case 'div_num':
                     $this->setDivNum($valeur);
                     break;
-                    case 'dep_nom':
-                        $this->setDepNom($valeur);
-                        break;
-                    case 'vil_nom':
-                        $this->setVilNom($valeur);
-                        break;
+                case 'dep_nom':
+                    $this->setDepNom($valeur);
+                    break;
+                case 'vil_nom':
+                    $this->setVilNom($valeur);
+                    break;
             }
         }
       }
