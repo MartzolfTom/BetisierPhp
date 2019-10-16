@@ -63,7 +63,7 @@ $_SESSION['personne'] = new Personne(
 <!--Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnes-->
 <?php } else if (!empty($_POST['div_num'])){
 
-//$personneManager->ajouterPersonne($_SESSION['personne']);
+$personneManager->ajouterPersonne($_SESSION['personne']);
 
 //on recupere le per_num de la nouvel personne
 $per_nom = $_SESSION['personne']->getPerNom();
