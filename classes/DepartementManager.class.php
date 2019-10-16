@@ -5,15 +5,15 @@ class DepartementManager{
   }
 
   public function getListDepartements(){
-    $departements = array();
+    $listeDepartements = array();
     $sql='SELECT dep_num, dep_nom FROM departement ORDER BY dep_num';
 
     $req = $this->db->query($sql);
 
     while ($departement = $req->fetch(PDO::FETCH_OBJ)) {
-      $departements[] = new Departement($departement);
+      $listeDepartements[] = new Departement($departement);
     }
-    return $departements;
+    return $listeDepartements;
     $req->closeCursor();
   }
 }

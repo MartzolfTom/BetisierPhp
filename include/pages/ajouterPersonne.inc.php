@@ -26,18 +26,16 @@ if (empty($_POST['per_nom'])) {
 	<form action="#" method="post">
 		Année : <select name="div_num">
 			<?php
-			$divisions = array();
-			$divisions = $divisionManager->getListDivisions();
-			foreach ($divisions as $division) { ?>
+			$listeDivisions = $divisionManager->getListDivisions();
+			foreach ($listeDivisions as $division) { ?>
 				<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
 		<?php	}
 			 ?>
 		</select> <br/> <br/>
 		Département : <select name="dep_num">
 			<?php
-			$departements = array();
-			$departements = $departementManager->getListDepartements();
-			foreach ($departements as $departement) { ?>
+			$listeDepartements = $departementManager->getListDepartements();
+			foreach ($listeDepartements as $departement) { ?>
 				<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
 		<?php	}
 			 ?>
