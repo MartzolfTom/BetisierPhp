@@ -6,8 +6,10 @@ $divisionManager = new DivisionManager($db);
 $departementManager = new DepartementManager($db);
 $personneManager = new PersonneManager($db);
 $etudiantManager = new EtudiantManager($db);
+$salarieManager = new SalarieManager($db);
+$fonctionManager = new FonctionManager($db);
 
-if (empty($_POST['per_sal']) && empty($_POST['per_etu']) && empty($_POST['div_num']) && empty($_POST['dep_num'])) {
+if (empty($_POST['type']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
 ?>
 	<h1>Ajouter une personne</h1>
 	<form action="#" method="post">
@@ -17,13 +19,13 @@ if (empty($_POST['per_sal']) && empty($_POST['per_etu']) && empty($_POST['div_nu
 		Mail : <input type="text" name="per_mail" value="dorianmare@yahoo.fr"> <br/> <br/>
 		Login : <input type="text" name="per_login" value="MichouDu87"> <br/> <br/>
 		Mot de passe : <input type="text" name="per_pwd" value="Rahnon"> <br/> <br/>
-		Catégorie : <input type="radio" name="per_etu" value="etudiant">
-		Etudiant <input type="radio" name="per_sal" value="salarie"> Salarie <br/> <br/>
+		Catégorie : <input type="radio" name="type" value="etudiant"> Etudiant
+		<input type="radio" name="type" value="salarie"> Salarie <br/> <br/>
 		<input type="submit" name="" value="Valider">
 	</form>
 
 <!--Si l'on choisis etudiant-->
-<?php } else if (!empty($_POST['per_etu'])) {
+<?php } else if ($_POST['type'] == 'etudiant') {
 
 $salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
@@ -66,30 +68,78 @@ $_SESSION['personne'] = new Personne(
 $personneManager->ajouterPersonne($_SESSION['personne']);
 
 //on recupere le per_num de la nouvel personne
-$per_nom = $_SESSION['personne']->getPerNom();
-$per_prenom = $_SESSION['personne']->getPerPrenom();
-
-$sql= "SELECT * FROM personne WHERE per_nom = '$per_nom' AND per_prenom = '$per_prenom'";
-$req = $db->query($sql);
-$personne = $req->fetch(PDO::FETCH_OBJ);
+$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
 
 $etudiant = new Etudiant(
 						array(
-							'per_num' =>$personne->per_num,
+							'per_num' => $per_num,
 							'dep_num' => $_POST['dep_num'],
 							'div_num' => $_POST['div_num']
 						)
 );
 
 $etudiantManager->ajouterEtudiant($etudiant);
+
+//on n'oublie pas de libere le cookie personne maintenant inutile
+unset($_SESSION['personne']);
+
 ?>
 L'Etudiant a bien été ajouté !
 
 <!--Cas ou l'on choisi salarie-->
-<?php } else if (!empty($_POST['per_sal'])){
+<?php } else if ($_POST['type'] == 'salarie'){
+$salt = "48@!alsd";
+$pwd = $_POST['per_pwd'];
+$pwd_crypte = sha1(sha1($pwd) . $salt);
+
+$_SESSION['personne'] = new Personne(
+							array('per_nom' => $_POST['per_nom'],
+							'per_prenom' => $_POST['per_prenom'],
+							'per_tel' => $_POST['per_tel'],
+					    'per_mail' => $_POST['per_mail'],
+					    'per_login' => $_POST['per_login'],
+							'per_pwd' => $pwd_crypte)
+);
+
 ?>
-
 	<h1>Ajouter un salarié</h1>
+	Téléphone professionel : <input type="text" name="sal_telprof" value=""> <br/> <br/>
 
-<?php }
+	<form action="#" method="post">
+		Fonction : <select name="fon_num">
+			<?php
+			$listeFonctions = $fonctionManager->getListFonctions();
+			foreach ($listeFonctions as $fonction) { ?>
+				<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
+		<?php	}
+		?>
+		</select> <br/> <br/>
+		<input type="submit" name="" value="Valider">
+	</form>
+
+<!--Après avoir valider le salarie, on enregistre les donnees dans notre base de donnees-->
+<?php } else if(!empty($_POST['fon_num'])){
+
+//$personneManager->ajouterPersonne($_SESSION['personne']);
+
+//on recupere le per_num de la nouvel personne
+$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+
+$salarie = new Salarie(
+						array(
+							'per_num' => $per_num,
+							'sal_telprof' => $_POST['sal_telprof'],
+							'fon_num' => $_POST['fon_num']
+						)
+);
+
+$salarieManager->ajouterSalarie($salarie);
+
+//on n'oublie pas de libere le cookie personne maintenant inutile
+//unset($_SESSION['personne']);
+?>
+Le salarie a bien été rajouté !!
+
+<?php
+}
 ?>

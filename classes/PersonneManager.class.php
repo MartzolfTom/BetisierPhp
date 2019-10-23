@@ -35,6 +35,16 @@ public function getListPersonnes(){
   $req->closeCursor();
 }
 
+public function getNumPersonne($personne){
+  $per_nom = $personne->getPerNom();
+  $per_prenom = $personne->getPerPrenom();
+
+  $sql= "SELECT * FROM personne WHERE per_nom = '$per_nom' AND per_prenom = '$per_prenom'";
+  $req = $this->db->query($sql);
+  $personne = $req->fetch(PDO::FETCH_OBJ);
+
+  return $personne->per_num;
+}
 
 public function modifVille($ville){
       $req=$this->db->prepare(

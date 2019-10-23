@@ -7,10 +7,12 @@ public function __construct($db){
 }
 
 
-public function add($ville){
+public function ajouterSalarie($salarie){
   $req=$this->db->prepare(
-    'INSERT INTO ville ( vil_nom) VALUES(:nom)');
-    $req->bindValue(':nom',$ville->getVilNom(),PDO::PARAM_STR);
+    'INSERT INTO salarie VALUES(:per_num, :sal_telprof, :fon_num)');
+    $req->bindValue(':per_num',$salarie->getPerNum(),PDO::PARAM_INT);
+    $req->bindValue(':sal_telprof',$salarie->getSalTelprof(),PDO::PARAM_STR);
+    $req->bindValue(':fon_num',$salarie->getFonNum(),PDO::PARAM_STR);
 
     $req->execute();
 }
