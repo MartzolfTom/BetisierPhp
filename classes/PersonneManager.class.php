@@ -89,7 +89,7 @@ public function getDetailPersonne($per_num){
 public function getListEnseignant(){
 
   $listeEnseignant=array();
-    $sql='SELECT per_nom FROM personne p join salarie s on p.per_num=s.per_num
+    $sql='SELECT per_nom, p.per_num FROM personne p join salarie s on p.per_num=s.per_num
                                          join fonction f on f.fon_num=s.fon_num
                                            WHERE fon_libelle=\'enseignant\'';
 

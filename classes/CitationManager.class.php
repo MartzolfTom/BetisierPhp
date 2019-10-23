@@ -8,10 +8,13 @@ public function __construct($db){
 
 public function add($citation){
   $req=$this->db->prepare(
-    'INSERT INTO citation (per_num, cit_date, cit_libelle) VALUES(:nom,:date,:libelle)');
-    $req->bindValue(':nom',$citation->getPerNum(),PDO::PARAM_INT);
+    'INSERT INTO citation (per_num,per_num_etu, cit_date, cit_libelle,cit_date_depo)
+      VALUES(:num,:num_etu,:date,:libelle,:date_depo)');
+    $req->bindValue(':num',$citation->getPerNum(),PDO::PARAM_INT);
     $req->bindValue(':date',$citation->getCitDate(),PDO::PARAM_STR );
+    $req->bindValue(':num_etu',$citation->getPerNumEtu(),PDO::PARAM_INT );
     $req->bindValue(':libelle',$citation->getCitLibelle(),PDO::PARAM_STR);
+    $req->bindValue(':date_depo',$citation->getCitDateDepo(),PDO::PARAM_STR);
 
     $req->execute();
 }
