@@ -52,7 +52,7 @@ switch ($page) {
         break;
     case 9:
         // inclure ici la page supprimer citations
-        //    include "pages/supprimerCitation.inc.php";
+           include "pages/supprimerCitation.inc.php";
         break;
 
 //

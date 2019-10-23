@@ -38,6 +38,23 @@ public function getListCitation(){
   $req->closeCursor();
 }
 
+public function getAllListCitation(){
+
+  $listeCitation =array();
+  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes, c.cit_num
+        FROM citation c join vote v ON c.cit_num=v.cit_num
+                        join personne p on c.per_num=p.per_num
+        group by cit_personne_cité, cit_libelle, cit_date
+        order by cit_date desc';
+  $req= $this->db->query($sql);
+
+  while ($citation = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeCitation[] = new Citation($citation);
+  }
+
+  return $listeCitation;
+  $req->closeCursor();
+}
 
 public function modifVille($ville){
       $req=$this->db->prepare(
@@ -48,9 +65,9 @@ public function modifVille($ville){
       $req->execute();
 }
 
-public function supprVille($ville){
-  $req=$this->db->prepare('DELETE FROM ville WHERE vil_num= :num');
-  $req->bindValue(':num',$ville->getVilNum(),PDO::PARAM_INT);
+public function supprimerCitation($citation){
+  $req=$this->db->prepare('DELETE FROM citation WHERE cit_num= :num');
+  $req->bindValue(':num',$citation->getCitNum(),PDO::PARAM_INT);
 
   $req->execute();
 }
