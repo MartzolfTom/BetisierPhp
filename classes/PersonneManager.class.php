@@ -21,7 +21,7 @@ public function ajouterPersonne($personne){
 
 public function getListPersonnes(){
 
-  $listePersonnes =array();
+  $listePersonnes = array();
   $sql='SELECT per_num, per_nom, per_prenom
         FROM personne
         order by per_num desc';
@@ -84,6 +84,18 @@ public function getDetailPersonne($per_num){
     return $detailPersonne;
     $req->closeCursor();
   }
+}
+
+public function getDetailModifierPersonne($per_num){
+  $personne = array();
+  $sql = 'SELECT per_nom, per_prenom, per_mail, per_tel, per_login, per_pwd FROM personne WHERE per_num = '. $per_num .'';
+
+  $req = $this->$db->query($sql);
+
+  $personne = $req->fetch(PPDO::FETCH_OBJ));
+  return $personne;
+
+  $req->closeCursor();
 }
 
 public function getListEnseignant(){

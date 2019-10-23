@@ -23,7 +23,7 @@ switch ($page) {
         break;
     case 3:
         // inclure ici la page modification des personnes
-        include "pages/modifierPersonne.inc.php";
+        include "pages/modifierPersonnes.inc.php";
         break;
     case 4:
         // inclure ici la page suppression personnes
@@ -85,6 +85,10 @@ switch ($page) {
                 // inclure ici la page supprimer ville
                 include "pages/detailPersonne.inc.php";
                 break;
+    case 16:
+      //inclure ici la page permettant de modifier une personnes
+      include "pages/modifierPersonne.inc.php";
+      break;
 
     default:include_once 'pages/accueil.inc.php';
 }
