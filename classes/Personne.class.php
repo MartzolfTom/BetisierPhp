@@ -20,7 +20,7 @@ class Personne
     }
 
     public function affecte($valeurs)
-    {
+    { 
         foreach ($valeurs as $attribut => $valeur) {
             switch ($attribut) {
                 case 'per_num':

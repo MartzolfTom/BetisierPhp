@@ -16,7 +16,7 @@ if (empty($_POST['cit_libelle'])) {
     Enseignant : <select size="1" name="per_num" value="Sarlat"/>  <?php
     foreach ($listeEnseignant as $personne) {
             ?>
-        <option value=<?php echo $personne->getPerNum(); ?>>
+        <option value= <?php echo $personne->getPerNum(); ?>>
         <?php echo $personne->getPerNom(); ?> </option> <?php
     }?>
 
@@ -30,7 +30,9 @@ if (empty($_POST['cit_libelle'])) {
 
     $tab = array('per_num' => $_POST['per_num'],
                  'cit_date' => $_POST['cit_date'],
-                 'cit_libelle' => $_POST['cit_libelle']);
+                 'cit_libelle' => $_POST['cit_libelle'],
+                 'per_num_etu' => 3,   // temporaire
+                 'cit_date_depo' => $_POST['cit_date'],);
 
     $citation = new Citation($tab);
 
