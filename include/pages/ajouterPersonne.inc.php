@@ -103,9 +103,9 @@ $_SESSION['personne'] = new Personne(
 
 ?>
 	<h1>Ajouter un salarié</h1>
-	Téléphone professionel : <input type="text" name="sal_telprof" value=""> <br/> <br/>
 
 	<form action="#" method="post">
+		Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
 		Fonction : <select name="fon_num">
 			<?php
 			$listeFonctions = $fonctionManager->getListFonctions();
@@ -120,15 +120,16 @@ $_SESSION['personne'] = new Personne(
 <!--Après avoir valider le salarie, on enregistre les donnees dans notre base de donnees-->
 <?php } else if(!empty($_POST['fon_num'])){
 
-//$personneManager->ajouterPersonne($_SESSION['personne']);
+$personneManager->ajouterPersonne($_SESSION['personne']);
 
 //on recupere le per_num de la nouvel personne
 $per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+$sal_telprof = $_POST['sal_telprof'];
 
 $salarie = new Salarie(
 						array(
 							'per_num' => $per_num,
-							'sal_telprof' => $_POST['sal_telprof'],
+							'sal_telprof' => $sal_telprof,
 							'fon_num' => $_POST['fon_num']
 						)
 );
