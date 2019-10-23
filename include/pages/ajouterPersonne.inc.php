@@ -9,7 +9,7 @@ $etudiantManager = new EtudiantManager($db);
 $salarieManager = new SalarieManager($db);
 $fonctionManager = new FonctionManager($db);
 
-if (empty($_POST['type']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
+if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
 ?>
 	<h1>Ajouter une personne</h1>
 	<form action="#" method="post">
@@ -19,13 +19,13 @@ if (empty($_POST['type']) && empty($_POST['div_num']) && empty($_POST['dep_num']
 		Mail : <input type="text" name="per_mail" value="dorianmare@yahoo.fr"> <br/> <br/>
 		Login : <input type="text" name="per_login" value="MichouDu87"> <br/> <br/>
 		Mot de passe : <input type="text" name="per_pwd" value="Rahnon"> <br/> <br/>
-		Catégorie : <input type="radio" name="type" value="etudiant"> Etudiant
-		<input type="radio" name="type" value="salarie"> Salarie <br/> <br/>
+		Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
+		<input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
 		<input type="submit" name="" value="Valider">
 	</form>
 
 <!--Si l'on choisis etudiant-->
-<?php } else if ($_POST['type'] == 'etudiant') {
+<?php } else if (!empty($_POST['etudiant'])) {
 
 $salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
@@ -87,7 +87,7 @@ unset($_SESSION['personne']);
 L'Etudiant a bien été ajouté !
 
 <!--Cas ou l'on choisi salarie-->
-<?php } else if ($_POST['type'] == 'salarie'){
+<?php } else if (!empty($_POST['salarie'])){
 $salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
 $pwd_crypte = sha1(sha1($pwd) . $salt);
@@ -136,8 +136,8 @@ $salarie = new Salarie(
 
 $salarieManager->ajouterSalarie($salarie);
 
-//on n'oublie pas de libere le cookie personne maintenant inutile
-//unset($_SESSION['personne']);
+//on n'oublie pas de liberer le cookie personne maintenant inutile
+unset($_SESSION['personne']);
 ?>
 Le salarie a bien été rajouté !!
 
