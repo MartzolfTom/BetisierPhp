@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $db = new Mypdo();
 $divisionManager = new DivisionManager($db);
 $departementManager = new DepartementManager($db);

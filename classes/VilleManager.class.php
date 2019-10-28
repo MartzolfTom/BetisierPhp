@@ -45,6 +45,15 @@ public function supprVille($ville){
   $req->execute();
 }
 
+
+public function nomVille($vil_num){
+    $req=$this->db->query('SELECT vil_nom as nom FROM ville WHERE vil_num='.$vil_num.'');
+    $donnees=$req->fetch();
+    $req->closeCursor();
+
+    return $donnees['nom'];
+}
+
 public function nbVille(){
     $req=$this->db->query('SELECT count(vil_num) as nbVille FROM ville');
     $donnees=$req->fetch();

@@ -8,7 +8,8 @@ public function __construct($db){
 
 public function ajouterPersonne($personne){
   $req=$this->db->prepare(
-    'INSERT INTO personne (per_nom, per_prenom, per_tel, per_mail, per_admin, per_login, per_pwd) VALUES(:per_nom, :per_prenom, :per_tel, :per_mail, 0, :per_login, :per_pwd)');
+    'INSERT INTO personne (per_nom, per_prenom, per_tel, per_mail, per_admin, per_login, per_pwd)
+     VALUES(:per_nom, :per_prenom, :per_tel, :per_mail, 0, :per_login, :per_pwd)');
     $req->bindValue(':per_nom',$personne->getPerNom(),PDO::PARAM_STR);
     $req->bindValue(':per_prenom',$personne->getPerPrenom(),PDO::PARAM_STR);
     $req->bindValue(':per_tel',$personne->getPerTel(),PDO::PARAM_STR);
@@ -92,7 +93,7 @@ public function getDetailModifierPersonne($per_num){
 
   $req = $this->$db->query($sql);
 
-  $personne = $req->fetch(PPDO::FETCH_OBJ));
+  $personne = $req->fetch(PPDO::FETCH_OBJ);
   return $personne;
 
   $req->closeCursor();

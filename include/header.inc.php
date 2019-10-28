@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -15,7 +16,7 @@
 		<div id="connect">
     <a href="index.php?page=14">Connexion</a>
 		</div>
-    
+
 		<div id="entete">
 			<div id="logo">
 

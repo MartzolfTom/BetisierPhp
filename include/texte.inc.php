@@ -71,7 +71,7 @@ switch ($page) {
 
     case 12:
         // inclure ici la page modifier ville
-        //    include "pages/modifierVille.inc.php";
+        include "pages/modifierVille.inc.php";
         break;
     case 13:
         // inclure ici la page supprimer ville
