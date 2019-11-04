@@ -22,7 +22,7 @@ public function add($citation){
 public function getListCitation(){
 
   $listeCitation =array();
-  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
         FROM citation c join vote v ON c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
         where cit_valide=1 and cit_date_valide is not null
@@ -56,13 +56,21 @@ public function getAllListCitation(){
   $req->closeCursor();
 }
 
-public function modifVille($ville){
-      $req=$this->db->prepare(
-      'UPDATE ville SET vil_num = :num, vil_nom = :nom WHERE vil_num= :num');
-      $req->bindValue(':num',$ville->getVilNum(),PDO::PARAM_INT);
-      $req->bindValue(':nom',$ville->getVilNom(),PDO::PARAM_STR);
+public function getDetailCitation($cit_num){
 
-      $req->execute();
+  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes, c.cit_num
+        FROM citation c join vote v ON c.cit_num=v.cit_num
+                        join personne p on c.per_num=p.per_num
+        where c.cit_num ='.$cit_num.'
+        group by cit_personne_cité, cit_libelle, cit_date
+        order by cit_date desc';
+  $req= $this->db->query($sql);
+
+  $citation = $req->fetch(PDO::FETCH_OBJ);
+  $detailCitation = new Citation($citation);
+
+  return $detailCitation;
+  $req->closeCursor();
 }
 
 public function supprimerCitation($citation){

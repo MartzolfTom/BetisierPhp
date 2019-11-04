@@ -36,7 +36,8 @@ if (empty($_POST['cit_libelle'])) {
 
     $citation = new Citation($tab);
 
-    $managerCitation->add($citation);
+
+   $managerCitation->add($citation);
     echo "La citation a été ajouté";
 }
 ?>

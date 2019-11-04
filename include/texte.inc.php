@@ -89,6 +89,10 @@ switch ($page) {
       //inclure ici la page permettant de modifier une personnes
       include "pages/modifierPersonne.inc.php";
       break;
+       case 17:
+          //inclure ici la page permettant de modifier une personnes
+          include "pages/noterCitation.inc.php";
+          break;
 
     default:include_once 'pages/accueil.inc.php';
 }

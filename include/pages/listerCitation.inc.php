@@ -11,6 +11,7 @@ $manager = new CitationManager($db);
      <th>Libellé</th>
 		 <th>Date</th>
 		 <th>Moyenne des notes</th>
+		 <th>Noter</th>
   </tr>
   <?php
 
@@ -22,6 +23,8 @@ foreach ($listeCitation as $citation) {
       <td> <?php echo $citation->getCitLibelle(); ?> </td>
 			<td> <?php echo $citation->getCitDate(); ?> </td>
 			<td> <?php echo $citation->getCitMoyNotes(); ?> </td>
+			<td><a href="index.php?page=17&cit_num=<?php echo $citation->getCitNum(); ?>" >
+					<img src="image/modifier.png" alt="petitCrayon"> </a></td>
     </tr>
   <?php }
 ?>

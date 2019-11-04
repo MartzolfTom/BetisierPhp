@@ -113,12 +113,12 @@ class Citation
 
     public function getCitLibelle()
     {
-        return $this->vit_libelle;
+        return $this->cit_libelle;
     }
 
-    public function setCitLibelle($vit_libelle)
+    public function setCitLibelle($cit_libelle)
     {
-        $this->vit_libelle = $vit_libelle;
+        $this->cit_libelle = $cit_libelle;
 
         return $this;
     }
