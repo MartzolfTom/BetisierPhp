@@ -39,11 +39,10 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
   }else{
 
- echo $_POST['note_citation'];
 
     $tab = array( 'cit_num' => $_GET['cit_num'],
-                  'per_num' => 77,
-                  'vot_valeur' => $_POST['note_citation']);   // temporaire);
+                  'per_num' => 77,            // temporaire
+                  'vot_valeur' => $_POST['note_citation']);
 
     $vote = new Vote($tab);
 
