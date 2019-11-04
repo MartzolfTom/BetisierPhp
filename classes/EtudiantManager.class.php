@@ -17,6 +17,23 @@ public function ajouterEtudiant($etudiant){
     $req->execute();
 }
 
+public function retirerEtudiant($per_num){
+  $req = $this->db->prepare('DELETE FROM etudiant WHERE per_num = :per_num');
+  $req->bindValue(':per_num', $per_num, PDO::PARAM_INT);
+
+  $req->execute();
+}
+
+public function modifierEtudiant($etudiant){
+  $req=$this->db->prepare(
+    'UPDATE etudiant SET dep_num = :dep_num, div_num = :div_num WHERE per_num = :per_num');
+    $req->bindValue(':per_num',$etudiant->getPerNum(),PDO::PARAM_INT);
+    $req->bindValue(':dep_num',$etudiant->getDepNum(),PDO::PARAM_STR);
+    $req->bindValue(':div_num',$etudiant->getDivNum(),PDO::PARAM_STR);
+
+    $req->execute();
+}
+
 public function getDetailEtudiant($per_num){
 
   $detailEtudiant =array();
