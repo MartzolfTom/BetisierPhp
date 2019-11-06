@@ -120,22 +120,18 @@ public function getDetailModifierPersonne($per_num){
   $req->closeCursor();
 }
 
-public function getListEnseignant(){
+public function getListSalarie(){
 
-  $listeEnseignant=array();
-    $sql='SELECT per_nom, p.per_num FROM personne p join salarie s on p.per_num=s.per_num
-                                         join fonction f on f.fon_num=s.fon_num
-                                           WHERE fon_libelle=\'enseignant\'';
-
+  $listeSalarie=array();
+  $sql='SELECT per_nom, p.per_num FROM personne p join salarie s on p.per_num=s.per_num';
   $req= $this->db->query($sql);
 
   while ($personne = $req->fetch(PDO::FETCH_OBJ)) {
-    $listeEnseignant[] = new Personne($personne);
-
-    return $listeEnseignant;
+    $listeSalarie[] = new Personne($personne);
+}
+    return $listeSalarie;
     $req->closeCursor();
 
-}
 }
 
 }
