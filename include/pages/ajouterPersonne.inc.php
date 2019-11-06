@@ -25,18 +25,10 @@ if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_n
 <!--Si l'on choisis etudiant-->
 <?php } else if (!empty($_POST['etudiant'])) {
 
-$salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
-$pwd_crypte = sha1(sha1($pwd) . $salt);
+$pwd_crypte = getPasswordCrypt($pwd);
 
-$_SESSION['personne'] = new Personne(
-							array('per_nom' => $_POST['per_nom'],
-							'per_prenom' => $_POST['per_prenom'],
-							'per_tel' => $_POST['per_tel'],
-					    'per_mail' => $_POST['per_mail'],
-					    'per_login' => $_POST['per_login'],
-							'per_pwd' => $pwd_crypte)
-);
+creerPersonne($pwd_crypte);
 
 ?>
 	<h1>Ajouter un étudiant</h1>
@@ -86,18 +78,11 @@ L'Etudiant a bien été ajouté !
 
 <!--Cas ou l'on choisi salarie-->
 <?php } else if (!empty($_POST['salarie'])){
-$salt = "48@!alsd";
-$pwd = $_POST['per_pwd'];
-$pwd_crypte = sha1(sha1($pwd) . $salt);
 
-$_SESSION['personne'] = new Personne(
-							array('per_nom' => $_POST['per_nom'],
-							'per_prenom' => $_POST['per_prenom'],
-							'per_tel' => $_POST['per_tel'],
-					    'per_mail' => $_POST['per_mail'],
-					    'per_login' => $_POST['per_login'],
-							'per_pwd' => $pwd_crypte)
-);
+$pwd = $_POST['per_pwd'];
+$pwd_crypte = getPasswordCrypt($pwd);
+
+creerPersonne($pwd_crypte);
 
 ?>
 	<h1>Ajouter un salarié</h1>
