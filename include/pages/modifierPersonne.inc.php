@@ -7,15 +7,14 @@ $etudiantManager = new EtudiantManager($db);
 $salarieManager = new SalarieManager($db);
 $fonctionManager = new FonctionManager($db);
 
-$salt = "48@!alsd";
-$per_num = $_GET['per_num'];
+$_SESSION['per_num'] = $_GET['per_num'];
 
-$detailsEtudiant = $etudiantManager->getDetailEtudiant($per_num);
-$detailsSalarie = $salarieManager->getDetailSalarie($per_num);
+$detailsEtudiant = $etudiantManager->getDetailEtudiant($_SESSION['per_num']);
+$detailsSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
 
 if(empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
 
-$detailsPersonne = $personneManager->getDetailModifierPersonne($per_num);
+$detailsPersonne = $personneManager->getDetailModifierPersonne($_SESSION['per_num']);
 ?>
 
 <h1>Modifier une personne</h1>
@@ -33,18 +32,10 @@ $detailsPersonne = $personneManager->getDetailModifierPersonne($per_num);
 
 <?php } else if (!empty($_POST['etudiant'])) {
 
-$salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
-$pwd_crypte = sha1(sha1($pwd) . $salt);
+$pwd_crypte = getPasswordCrypt($pwd);
 
-$_SESSION['personne'] = new Personne(
-							array('per_nom' => $_POST['per_nom'],
-							'per_prenom' => $_POST['per_prenom'],
-							'per_tel' => $_POST['per_tel'],
-					    'per_mail' => $_POST['per_mail'],
-					    'per_login' => $_POST['per_login'],
-							'per_pwd' => $pwd_crypte)
-);
+creerPersonne($pwd_crypte);
 
 ?>
 	<h1>Modifier un étudiant</h1>
@@ -71,11 +62,11 @@ $_SESSION['personne'] = new Personne(
 <!--Apres avoir valider l'etudiant, on modifie dans les tables personne et etudiant les donnes-->
 <?php } else if (!empty($_POST['div_num'])){
 
-$personneManager->modifierPersonne($_SESSION['personne'], $per_num);
+$personneManager->modifierPersonne($_SESSION['personne'], $_SESSION['per_num']);
 
 $etudiant = new Etudiant(
 						array(
-							'per_num' => $per_num,
+							'per_num' => $_SESSION['per_num'],
 							'dep_num' => $_POST['dep_num'],
 							'div_num' => $_POST['div_num']
 						)
@@ -87,12 +78,13 @@ if (!empty($detailsEtudiant)) {
   $etudiantManager->modifierEtudiant($etudiant);
 }
 else {
-  $salarieManager->retirerSalarie($per_num);
+  $salarieManager->retirerSalarie($_SESSION['per_num']);
   $etudiantManager->ajouterEtudiant($etudiant);
 }
 
 //on n'oublie pas de libere le cookie personne maintenant inutile
 unset($_SESSION['personne']);
+unset($_SESSION['per_num']);
 
 ?>
 L'Etudiant a bien été modifié !
@@ -100,18 +92,10 @@ L'Etudiant a bien été modifié !
 
 <!--Cas ou l'on choisi salarie-->
 <?php } else if (!empty($_POST['salarie'])){
-$salt = "48@!alsd";
 $pwd = $_POST['per_pwd'];
-$pwd_crypte = sha1(sha1($pwd) . $salt);
+$pwd_crypte = getPasswordCrypt($pwd);
 
-$_SESSION['personne'] = new Personne(
-							array('per_nom' => $_POST['per_nom'],
-							'per_prenom' => $_POST['per_prenom'],
-							'per_tel' => $_POST['per_tel'],
-					    'per_mail' => $_POST['per_mail'],
-					    'per_login' => $_POST['per_login'],
-							'per_pwd' => $pwd_crypte)
-);
+creerPersonne($pwd_crypte);
 
 ?>
 	<h1>Modifier un salarié</h1>
@@ -132,13 +116,13 @@ $_SESSION['personne'] = new Personne(
 <!--Après avoir valider le salarie, on enregistre les donnees dans notre base de donnees-->
 <?php } else if(!empty($_POST['fon_num'])){
 
-$personneManager->modifierPersonne($_SESSION['personne'], $per_num);
+$personneManager->modifierPersonne($_SESSION['personne'], $_SESSION['per_num']);
 
 $sal_telprof = $_POST['sal_telprof'];
 
 $salarie = new Salarie(
 						array(
-							'per_num' => $per_num,
+							'per_num' => $_SESSION['per_num'],
 							'sal_telprof' => $sal_telprof,
 							'fon_num' => $_POST['fon_num']
 						)
@@ -150,12 +134,13 @@ if (!empty($detailSalarie)) {
   $salarieManager->modifierSalarie($salarie);
 }
 else {
-  $etudiantManager->retirerEtudiant($per_num);
+  $etudiantManager->retirerEtudiant($_SESSION['per_num']);
   $salarieManager->ajouterSalarie($salarie);
 }
 
 //on n'oublie pas de liberer le cookie personne maintenant inutile
 unset($_SESSION['personne']);
+unset($_SESSION['per_num']);
 ?>
 Le salarie a bien été modifié !!
 
