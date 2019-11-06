@@ -3,7 +3,7 @@ $db = new Mypdo();
 $managerCitation = new CitationManager($db);
 $managerPersonne = new PersonneManager($db);
 $listeCitation = $managerCitation->getListCitation();
-$listeEnseignant = $managerPersonne->getListEnseignant();
+$listeSalarie = $managerPersonne->getListSalarie();
 ?>
 
 <h1>Ajouter une citation</h1>
@@ -13,12 +13,8 @@ if (empty($_POST['cit_libelle'])) {
     ?>
   <form method ="post" action ="#">
 
-    Enseignant : <select size="1" name="per_num" value="Sarlat"/>  <?php
-    foreach ($listeEnseignant as $personne) {
-            ?>
-        <option value= <?php echo $personne->getPerNum(); ?>>
-        <?php echo $personne->getPerNom(); ?> </option> <?php
-    }?>
+    Salarie : <select size="1" name="per_num"/>  <?php
+    foreach ($listeSalarie as $personne) {?><option value= <?php echo $personne->getPerNum();?> > <?php echo $personne->getPerNom(); ?> </option> <?php } ?>
 
      </select><br /><br />
     Date Citation : <input type="date" name="cit_date" value="2019-10-15"><br /><br />

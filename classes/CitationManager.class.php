@@ -89,5 +89,45 @@ public function nbcitations(){
     return $donnees['nbcitations'];
 }
 
+public function getDatePlusAncienne(){
+    $req=$this->db->query('SELECT cit_date as datePlusAncienne FROM citation
+                           having datePlusAncienne <=all(select cit_date from citation)');
+    $donnees=$req->fetch();
+    $req->closeCursor();
+
+    return $donnees['datePlusAncienne'];
+}
+
+public function getDateJour(){
+    $req=$this->db->query(' SELECT DATE( NOW() ) as dateJour');
+    $donnees=$req->fetch();
+    $req->closeCursor();
+
+    return $donnees['dateJour'];
+}
+
+public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin){
+
+  $listeCitation =array();
+  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+        FROM citation c join vote v ON c.cit_num=v.cit_num
+                        join personne p on c.per_num=p.per_num
+        where cit_valide=1
+        and cit_date_valide is not null
+        and c.per_num='.$per_num.'
+        and cit_date between \''.$cit_date_debut.'\' and \''.$cit_date_fin.'\'
+        group by cit_personne_cité, cit_libelle, cit_date,c.cit_num
+        having avg(vot_valeur) between '.$cit_note_debut.' and '.$cit_note_fin.'
+        order by cit_date desc';
+  $req= $this->db->query($sql);
+
+  while ($citation = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeCitation[] = new Citation($citation);
+  }
+
+  return $listeCitation;
+  $req->closeCursor();
+}
+
 }
  ?>
