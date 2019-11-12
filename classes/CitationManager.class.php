@@ -23,7 +23,7 @@ public function getListCitation(){
 
   $listeCitation =array();
   $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
-        FROM citation c join vote v ON c.cit_num=v.cit_num
+        FROM citation c left join vote v ON c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
         where cit_valide=1 and cit_date_valide is not null
         group by cit_personne_cité, cit_libelle, cit_date
@@ -41,9 +41,8 @@ public function getListCitation(){
 public function getAllListCitation(){
 
   $listeCitation =array();
-  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes, c.cit_num
-        FROM citation c join vote v ON c.cit_num=v.cit_num
-                        join personne p on c.per_num=p.per_num
+  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
+        FROM citation c join personne p on c.per_num=p.per_num
         group by cit_personne_cité, cit_libelle, cit_date
         order by cit_date desc';
   $req= $this->db->query($sql);
@@ -58,9 +57,8 @@ public function getAllListCitation(){
 
 public function getDetailCitation($cit_num){
 
-  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes, c.cit_num
-        FROM citation c join vote v ON c.cit_num=v.cit_num
-                        join personne p on c.per_num=p.per_num
+  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
+        FROM citation c join personne p on c.per_num=p.per_num
         where c.cit_num ='.$cit_num.'
         group by cit_personne_cité, cit_libelle, cit_date
         order by cit_date desc';
@@ -98,13 +96,6 @@ public function getDatePlusAncienne(){
     return $donnees['datePlusAncienne'];
 }
 
-public function getDateJour(){
-    $req=$this->db->query(' SELECT DATE( NOW() ) as dateJour');
-    $donnees=$req->fetch();
-    $req->closeCursor();
-
-    return $donnees['dateJour'];
-}
 
 public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin){
 
@@ -129,5 +120,39 @@ public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,
   $req->closeCursor();
 }
 
+
+public function getListCitationNonValides(){
+
+  $listeCitation =array();
+  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date
+        FROM citation c join personne p on c.per_num=p.per_num
+        where cit_valide=0
+        group by cit_personne_cité, cit_libelle, cit_date
+        order by cit_date desc';
+  $req= $this->db->query($sql);
+
+  while ($citation = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeCitation[] = new Citation($citation);
+  }
+  return $listeCitation;
+  $req->closeCursor();
+ }
+
+ public function validerCitation($cit_num,$per_num_valide){
+
+   $req=$this->db->prepare('UPDATE citation set per_num_valide ='.$per_num_valide.',cit_valide = 1,cit_date_valide=NOW()
+         WHERE cit_num='.$cit_num.'');
+
+   $req->execute();
+  }
+
+  public function getDateJour(){
+      $req=$this->db->query(' SELECT DATE( NOW() ) as dateJour');
+      $donnees=$req->fetch();
+      $req->closeCursor();
+
+      return $donnees['dateJour'];
+  }
 }
+
  ?>

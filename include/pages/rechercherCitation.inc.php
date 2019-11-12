@@ -36,6 +36,7 @@ if (empty($_POST['cit_date_debut'])) {
     $cit_date_fin=$_POST['cit_date_fin'];
     $cit_note_debut=$_POST['cit_note_debut'];
     $cit_note_fin=$_POST['cit_note_fin'];
+    $listeRechercheCitation = $managerCitation->getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin);
 
 ?>
     <h1>Resultat de la recherche des citations  </h1>
@@ -51,7 +52,6 @@ if (empty($_POST['cit_date_debut'])) {
 
     </tr>
     <?php
-  $listeRechercheCitation = $managerCitation->getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin);
   foreach ($listeRechercheCitation as $citation) {
       ?>
       <tr>
