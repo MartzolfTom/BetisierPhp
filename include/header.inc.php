@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+session_start();
+$_SESSION['connexion'] = false;
+$_SESSION['per_login'] = "none";
+$_SESSION['estSalarie'] = null;
+$_SESSION['estAdmin'] = false;
+
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -14,7 +21,7 @@
 	<body>
 	<div id="header">
 		<div id="connect">
-    <a href="index.php?page=14">Connexion</a>
+      <a href="index.php?page=14">Connexion</a>
 		</div>
 
 		<div id="entete">

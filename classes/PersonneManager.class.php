@@ -102,10 +102,10 @@ public function getDetailPersonne($per_num){
 
   while ($personne = $req->fetch(PDO::FETCH_OBJ)) {
     $detailPersonne[] = new Personne($personne);
+  }
 
     return $detailPersonne;
     $req->closeCursor();
-  }
 }
 
 public function getDetailModifierPersonne($per_num){

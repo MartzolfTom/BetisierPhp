@@ -24,7 +24,7 @@ $detailsPersonne = $personneManager->getDetailModifierPersonne($_SESSION['per_nu
   Téléphone : <input type="text" name="per_tel" value="<?php echo $detailsPersonne->per_tel ?>"> <br/> <br/>
   Mail : <input type="text" name="per_mail" value="<?php echo $detailsPersonne->per_mail ?>"> <br/> <br/>
   Login : <input type="text" name="per_login" value="<?php echo $detailsPersonne->per_login ?>"> <br/> <br/>
-  Mot de passe : <input type="text" name="per_pwd" value=""> <br/> <br/>
+  Mot de passe : <input type="password" name="per_pwd" value=""> <br/> <br/>
   Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
   <input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
   <input type="submit" name="" value="Valider">

@@ -1,55 +1,37 @@
 <?php
 $db = new Mypdo();
-$manager = new ConnexionManager($db);
+$connexionManager = new ConnexionManager($db);
 
-$nb_alea1 = rand(1, 20);
-$nb_alea2 = rand(1, 20);
+$nb_alea1 = rand(1, 9);
+$nb_alea2 = rand(1, 9);
 
 ?>
 
 <h1> Pour vous connecter</h1>
 
 <?php
-if (empty($_POST['nom'])) {
-    ?>
+  if (empty($_POST['per_login'])) {
+  $_SESSION['bonResultat'] = $nb_alea1 + $nb_alea2;
+?>
 
 <form action="#" method="post">
-  Nom d'utilisateur : <input type="text" name="per_login" value="Bob"> <br/><br/>
-      Mot de passe :      <input type="password" name="mdp" value="BornToRun"> <br/><br/>
-      <input type="text" name="nb_alea1" value="<?php echo $nb_alea1; ?> " size="1"> +
-      <input type="text" name="nb_alea2" value="<?php echo $nb_alea2; ?> " size="1"> =
-      <input type="text" name="somme_nombre" value=""> <br/><br/>
-      <input type="submit" name="" value="Envoyer"> <br/><br/>
+  Nom d'utilisateur : <input type="text" name="per_login" value="MichouDu87"> <br/><br/>
+  Mot de passe :      <input type="password" name="pwd" value="Rahnon"> <br/><br/>
+  <img src="image/nb/<?php echo $nb_alea1 ?>.jpg" alt="premierNombre"> +
+  <img src="image/nb/<?php echo $nb_alea2 ?>.jpg" alt="secondNombre"> =
+  <input type="text" name="resultat" value=""> <br/><br/>
+  <input type="submit" name="" value="Connexion"> <br/><br/>
 </form>
 <?php
 }
-else {
-    //declaration des variables de session, du mot de passe et du resultat
+else if(!empty($_POST['per_login'])){
+  if ($_SESSION['bonResultat'] == $_POST['resultat'] && $connexionManager->connexion($_POST['pwd'], $_POST['per_login']) ) {
+    echo "Connexion réussie !!";
     $_SESSION['per_login'] = $_POST['per_login'];
-    $mdp = $_POST['mdp'];
+    $_SESSION['connexion'] = true;
+  } else {
+    echo "Connexion échouée, mot de passe ou login invalide.";
+  }
 
-    $nb1 = $_POST['nb_alea1'];
-    $nb2 =  $_POST['nb_alea2'];
-    $resultat =  $nb1.$nb2;
-    $saisieResultat = $_POST['somme_nombre'];
-
-    //on verifie en premier lieu que le nombre rentree est le bonne
-    if ($resultat = $saisieResultat) {
-
-      //en cas de bonne connexion
-      if ($manager->Login($mdp) == true) {
-        echo "Vous avez bien été connecté !";
-        echo "<br /><br />";
-        echo "Redirection automatique dans 2 secondes";
-      }
-      //en cas de mauvaise connexion
-      else {
-        echo "Echec de la connection, mot de passe ou nom incorrect";
-      }
-
-    }
-    else {
-      echo "Vous vous etes trompe dans votre calcul";
-    }
 }
 ?>

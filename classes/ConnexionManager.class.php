@@ -5,47 +5,28 @@ class ConnexionManager {
     $this->db=$db;
   }
 
-  public function Login($mdp)
-  {
-    //on controle si le nom est valide dans notre base de donnees
-    $per_login = trim($_SESSION['per_login']);
-    $per_pwd = trim($mdp);
-    if (nomPresentDansBase($per_login)) {
-
-      $req1 = $this->db->prepare(
-        'SELECT per_pwd FROM personne p WHERE per_login = :per_login'
-      );
-      $req1->bindValue(':per_login', $per_login, PDO::PARAM_STR);
-      $personne1 = new Personne($req1->fetch(PDO::FETCH_OBJ));
-
-      $req2 = $this->db->prepare(
-        'SELECT per_pwd FROM  personne p WHERE per_login = :per_login AND per_pwd = :per_pwd'
-      );
-      $req2->bindValue(':per_login', $per_login, PDO::PARAM_STR);
-      $req2->bindValue(':per_pwd', $per_pwd, PDO::PARAM_STR);
-      $personne2 = new Personne($req2->fetch(PDO::FETCH_OBJ));
-
-
-      if ($personne1->getPerPwd() == $personne2->getPerPwd()) {
-        return true;
-      }
-      else {
-        return false;
-      }
+  public function connexion($pwd, $per_login){
+    $pwd_crypt = getPasswordCrypt($pwd);
+    if ($this->bonneConnexion($pwd_crypt, $per_login)) {
+      return true;
+    } else {
+      return false;
     }
   }
 
-  public function nomPresentDansBase($per_login){
-    $sql = "SELECT per_nom FROM personne WHERE per_login = $per_login";
-    $requete = $this->$db->query($sql);
+  public function bonneConnexion($pwd_crypt, $per_login){
+    $req = $this->db->prepare("SELECT per_num FROM personne WHERE per_pwd = :pwd_crypt AND per_login = :per_login");
+    $req->bindValue(":pwd_crypt", $pwd_crypt, PDO::PARAM_STR);
+    $req->bindValue(":per_login", $per_login, PDO::PARAM_INT);
 
-    $personne = new Personne($requete->fetch(PDO::FETCH_OBJ));
-    if (empty($personne)) {
+    $per_num = $req->execute();
+
+    if (!empty($per_num)) {
+      return true;
+    } else {
       return false;
     }
-    else {
-      return true;
-    }
+
   }
 }
 ?>

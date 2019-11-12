@@ -16,7 +16,7 @@ if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_n
 		Téléphone : <input type="text" name="per_tel" value="0629107479"> <br/> <br/>
 		Mail : <input type="text" name="per_mail" value="dorianmare@yahoo.fr"> <br/> <br/>
 		Login : <input type="text" name="per_login" value="MichouDu87"> <br/> <br/>
-		Mot de passe : <input type="text" name="per_pwd" value="Rahnon"> <br/> <br/>
+		Mot de passe : <input type="password" name="per_pwd" value="Rahnon"> <br/> <br/>
 		Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
 		<input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
 		<input type="submit" name="" value="Valider">
