@@ -29,7 +29,7 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
     <form method ="post" action ="#">
 
-      Note : <input type="number" name="note_citation" value="10"/>
+      Note : <input type="number" name="note_citation" min="0" max="20" value="10"/>
           <input type="submit" name="Valider" />
     </form>
 
@@ -39,7 +39,7 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
 
     $tab = array( 'cit_num' => $_GET['cit_num'],
-                  'per_num' => 77,            // temporaire
+                  'per_num' => $_SESSION['per_num'],
                   'vot_valeur' => $_POST['note_citation']);
 
     $vote = new Vote($tab);
