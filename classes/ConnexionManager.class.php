@@ -17,6 +17,7 @@ class ConnexionManager {
 
     $req->execute();
     $lignePersonne = $req->fetch(PDO::FETCH_OBJ);
+    $req->closeCursor();
 
     return $lignePersonne;
   }
