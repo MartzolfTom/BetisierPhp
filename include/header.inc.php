@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['per_num'] = null;
 $_SESSION['connexion'] = false;
 $_SESSION['per_login'] = "none";
 $_SESSION['estSalarie'] = null;
