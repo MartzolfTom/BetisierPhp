@@ -14,7 +14,6 @@ if (empty($_POST['note_citation'])) {
      <th>Nom de l'enseignant</th>
      <th>Libellé</th>
 		 <th>Date</th>
-		 <th>Moyenne des notes</th>
   </tr>
   <?php
 
@@ -24,7 +23,6 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
       <td> <?php echo $citation->getCitPersonneCit(); ?> </td>
       <td> <?php echo $citation->getCitLibelle(); ?> </td>
 			<td> <?php echo $citation->getCitDate(); ?> </td>
-			<td> <?php echo $citation->getCitMoyNotes(); ?> </td>
     </tr>
   </table>
 

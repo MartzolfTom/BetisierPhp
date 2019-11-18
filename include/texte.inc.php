@@ -48,7 +48,7 @@ switch ($page) {
         break;
     case 8:
         // inclure ici la page valider citations
-        //    include "pages/validerCitation.inc.php";
+            include "pages/validerCitation.inc.php";
         break;
     case 9:
         // inclure ici la page supprimer citations
