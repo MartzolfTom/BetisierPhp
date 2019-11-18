@@ -7,7 +7,7 @@ class ConnexionManager {
 
   public function connexion($pwd, $per_login){
     $pwd_crypt = getPasswordCrypt($pwd);
-    return $this->bonneConnexion($pwd, $per_login);
+    return $this->bonneConnexion($pwd_crypt, $per_login);
   }
 
   public function bonneConnexion($pwd_crypt, $per_login){
@@ -15,9 +15,10 @@ class ConnexionManager {
     $req->bindValue(":pwd_crypt", $pwd_crypt, PDO::PARAM_STR);
     $req->bindValue(":per_login", $per_login, PDO::PARAM_STR);
 
-    $per_num = $req->fetch(PDO::FETCH_OBJ);
+    $req->execute();
+    $lignePersonne = $req->fetch(PDO::FETCH_OBJ);
 
-    return $per_num;
+    return $lignePersonne;
   }
 }
 ?>

@@ -26,8 +26,10 @@ $nb_alea2 = rand(1, 9);
 }
 else if(!empty($_POST['per_login'])){
   if ($_SESSION['bonResultat'] == $_POST['resultat'] && $connexionManager->connexion($_POST['pwd'], $_POST['per_login']) ) {
+    echo 'Connexion réussi !';
     $_SESSION['per_login'] = $_POST['per_login'];
     $_SESSION['connexion'] = true;
+    $_SESSION['per_num'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_num;
   } else {
     echo "Connexion échouée, mot de passe ou login invalide.";
   }
