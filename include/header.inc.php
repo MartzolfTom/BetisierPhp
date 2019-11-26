@@ -4,7 +4,7 @@ if (empty($_SESSION['per_num'])) {
   $_SESSION['per_num'] = null;
   $_SESSION['connexion'] = false;
   $_SESSION['per_login'] = "none";
-  $_SESSION['estSalarie'] = null;
+  $_SESSION['estEtudiant'] = null;
   $_SESSION['estAdmin'] = null;
 }
 

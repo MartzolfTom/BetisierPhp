@@ -37,10 +37,10 @@ else if(!empty($_POST['per_login'])){
     $detailSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
 
     if ($detailSalarie) {
-      $_SESSION['estSalarie'] = true;
+      $_SESSION['estEtudiant'] = false;
     }
     else {
-      $_SESSION['estSalarie'] = false;
+      $_SESSION['estEtudiant'] = true;
     }
 
     echo '<p>Redirection dans 2 secondes</p>';
