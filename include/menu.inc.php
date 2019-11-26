@@ -14,9 +14,9 @@
 		</ul>
 		<p><img class="icone" src="image/citation.gif" alt="Citation"/>Citations</p>
 		<ul>
-			<?php if (!$_SESSION[estSalarie]) { ?>
+			<?php if (!$_SESSION['estSalarie']) { ?>
 				<li><a href="index.php?page=5">Ajouter</a></li>
-			<?php} ?>
+			<?php } ?>
 			<li><a href="index.php?page=6">Lister</a></li>
 			<?php if ($_SESSION['connexion']) { ?>
 				<li><a href="index.php?page=7">Rechercher</a></li>
