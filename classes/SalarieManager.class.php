@@ -35,18 +35,15 @@ public function modifierSalarie($salarie){
 
 public function getDetailSalarie($per_num){
 
-  $detailSalarie =array();
   $sql='SELECT sal_telprof, fon_libelle FROM salarie s join fonction f on s.fon_num=f.fon_num
                                          WHERE s.per_num= '. $per_num .'';
 
   $req= $this->db->query($sql);
 
-  while ($salarie = $req->fetch(PDO::FETCH_OBJ)) {
-    $detailSalarie[] = new Salarie($salarie);
+  $detailSalarie = $req->fetch(PDO::FETCH_OBJ);
 
-    return $detailSalarie;
-    $req->closeCursor();
-  }
+  return $detailSalarie;
+  $req->closeCursor();
 }
 
 }

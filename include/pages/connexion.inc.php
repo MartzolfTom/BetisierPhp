@@ -1,14 +1,14 @@
 <?php
 $db = new Mypdo();
 $connexionManager = new ConnexionManager($db);
-$etudiantManager = new EtudiantManager($db);
+$salarieManager = new SalarieManager($db);
 
 $nb_alea1 = rand(1, 9);
 $nb_alea2 = rand(1, 9);
 
 ?>
 
-<h1> Pour vous connecter</h1>
+<h1>Pour vous connecter</h1>
 
 <?php
   if (empty($_POST['per_login'])) {
@@ -28,10 +28,24 @@ $nb_alea2 = rand(1, 9);
 else if(!empty($_POST['per_login'])){
   if ($_SESSION['bonResultat'] == $_POST['resultat'] && $connexionManager->connexion($_POST['pwd'], $_POST['per_login']) ) {
     echo 'Connexion réussi !';
+
     $_SESSION['per_login'] = $_POST['per_login'];
     $_SESSION['connexion'] = true;
     $_SESSION['per_num'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_num;
-    $_SESSION['estSalarie'] = ;
+
+    $detailSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
+
+    if ($detailSalarie) {
+      $_SESSION['estSalarie'] = true;
+    }
+    else {
+      $_SESSION['estSalarie'] = false;
+    }
+
+    //FAIRE LE $_SESSION['admin']
+    echo '<p>Redirection dans 2 secondes</p>';
+    header("Refresh: 2; url=index.php?page=0");
+
   } else {
     echo "Connexion échouée. Mot de passe, login invalide ou mauvais Capcha";
   }

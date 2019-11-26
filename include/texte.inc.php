@@ -77,22 +77,26 @@ switch ($page) {
         // inclure ici la page supprimer ville
         include "pages/supprimerVille.inc.php";
         break;
-        case 14:
-            // inclure ici la page supprimer ville
-            include "pages/connexion.inc.php";
-            break;
-            case 15:
-                // inclure ici la page supprimer ville
-                include "pages/detailPersonne.inc.php";
-                break;
+    case 14:
+        // inclure ici la page supprimer ville
+        include "pages/connexion.inc.php";
+        break;
+    case 15:
+        // inclure ici la page supprimer ville
+        include "pages/detailPersonne.inc.php";
+        break;
     case 16:
       //inclure ici la page permettant de modifier une personnes
       include "pages/modifierPersonne.inc.php";
       break;
-       case 17:
-          //inclure ici la page permettant de modifier une personnes
-          include "pages/noterCitation.inc.php";
-          break;
+    case 17:
+      //inclure ici la page permettant de modifier une personnes
+      include "pages/noterCitation.inc.php";
+      break;
+    case 18:
+      //inclure ici la page qui permet de se deconnecter
+      include "pages/deconnexion.inc.php";
+      break;
 
     default:include_once 'pages/accueil.inc.php';
 }

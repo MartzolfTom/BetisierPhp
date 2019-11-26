@@ -5,7 +5,7 @@ if (empty($_SESSION['per_num'])) {
   $_SESSION['connexion'] = false;
   $_SESSION['per_login'] = "none";
   $_SESSION['estSalarie'] = null;
-  $_SESSION['estAdmin'] = false;
+  $_SESSION['estAdmin'] = null;
 }
 
 ?>
@@ -24,7 +24,14 @@ if (empty($_SESSION['per_num'])) {
 	<body>
 	<div id="header">
 		<div id="connect">
-      <a href="index.php?page=14">Connexion</a>
+      <?php
+      if (empty($_SESSION['per_num'])) {
+        echo '<a href="index.php?page=14">Connexion</a>';
+      }
+      else{
+        echo '<p>Utilisateur : '.$_SESSION['per_login'].' <a href="index.php?page=18">Deconnexion</a></p>';
+      }
+      ?>
 		</div>
 
 		<div id="entete">
