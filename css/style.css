@@ -27,7 +27,8 @@ body{
 #entete{
 	width:1050px;
 	height:230px;
-	margin:auto;
+	margin:left;
+	padding-left: 5%;
 }
 #logo{
 	float:left;
@@ -169,4 +170,10 @@ table, th, td {
   border: 1px solid black;
 	text-align: center;
 	padding : 5px 10px 10px 5px;
+}
+
+
+#imageSourire{
+	width: 200px;
+	height: auto;
 }

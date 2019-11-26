@@ -36,7 +36,10 @@ if (empty($_SESSION['per_num'])) {
 
 		<div id="entete">
 			<div id="logo">
-
+        <?php if ($_SESSION['connexion']) { ?>
+          <img id="imageSourire" src="image/smile.jpg" alt="grosSourire">
+        <?php }
+        ?>
 			</div>
 			<div id="titre">
 				Le bétisier de l'IUT,<br />Partagez les meilleures perles !!!

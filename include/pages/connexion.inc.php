@@ -27,11 +27,12 @@ $nb_alea2 = rand(1, 9);
 }
 else if(!empty($_POST['per_login'])){
   if ($_SESSION['bonResultat'] == $_POST['resultat'] && $connexionManager->connexion($_POST['pwd'], $_POST['per_login']) ) {
-    echo 'Connexion réussi !';
+    echo 'Connexion réussie !';
 
     $_SESSION['per_login'] = $_POST['per_login'];
     $_SESSION['connexion'] = true;
     $_SESSION['per_num'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_num;
+    $_SESSION['estAdmin'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_admin;
 
     $detailSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
 
@@ -42,7 +43,6 @@ else if(!empty($_POST['per_login'])){
       $_SESSION['estSalarie'] = false;
     }
 
-    //FAIRE LE $_SESSION['admin']
     echo '<p>Redirection dans 2 secondes</p>';
     header("Refresh: 2; url=index.php?page=0");
 

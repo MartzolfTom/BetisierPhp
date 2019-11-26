@@ -11,7 +11,7 @@ class ConnexionManager {
   }
 
   public function bonneConnexion($pwd_crypt, $per_login){
-    $req = $this->db->prepare("SELECT per_num FROM personne WHERE per_pwd = :pwd_crypt AND per_login = :per_login");
+    $req = $this->db->prepare("SELECT per_num, per_admin FROM personne WHERE per_pwd = :pwd_crypt AND per_login = :per_login");
     $req->bindValue(":pwd_crypt", $pwd_crypt, PDO::PARAM_STR);
     $req->bindValue(":per_login", $per_login, PDO::PARAM_STR);
 
