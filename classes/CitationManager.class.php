@@ -19,13 +19,32 @@ public function add($citation){
     $req->execute();
 }
 
-public function getListCitation(){
+public function getListCitationPasNotées($num_etu){
 
   $listeCitation =array();
   $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
         FROM citation c left join vote v ON c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
-        where cit_valide=1 and cit_date_valide is not null
+        where cit_valide=1 and cit_date_valide is not null  and c.cit_num not in ( Select cit_num from vote where per_num ='.$num_etu.')
+        group by cit_personne_cité, cit_libelle, cit_date
+        order by cit_date desc';
+  $req= $this->db->query($sql);
+
+  while ($citation = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeCitation[] = new Citation($citation);
+  }
+
+  return $listeCitation;
+  $req->closeCursor();
+}
+
+public function getListCitationDejaNotées($num_etu){
+
+  $listeCitation =array();
+  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+        FROM citation c left join vote v ON c.cit_num=v.cit_num
+                        join personne p on c.per_num=p.per_num
+        where cit_valide=1 and cit_date_valide is not null and c.cit_num in ( Select cit_num from vote where per_num ='.$num_etu.')
         group by cit_personne_cité, cit_libelle, cit_date
         order by cit_date desc';
   $req= $this->db->query($sql);

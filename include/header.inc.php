@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION['per_num'])) {
-  $_SESSION['per_num'] = null;
+  $_SESSION['per_num'] = 0;
   $_SESSION['connexion'] = false;
   $_SESSION['per_login'] = "none";
   $_SESSION['estEtudiant'] = null;

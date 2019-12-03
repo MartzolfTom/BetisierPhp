@@ -1,7 +1,8 @@
 <?php
 $db = new Mypdo();
 $manager = new VilleManager($db);
-$listeVille = $manager->getListVille();
+$listeVille = $manager->getListVilleASupprimer();
+
 ?>
 
 	<h1>Supprimer une ville</h1>

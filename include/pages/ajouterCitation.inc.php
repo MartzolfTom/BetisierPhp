@@ -2,7 +2,6 @@
 $db = new Mypdo();
 $managerCitation = new CitationManager($db);
 $managerPersonne = new PersonneManager($db);
-$listeCitation = $managerCitation->getListCitation();
 $listeSalarie = $managerPersonne->getListSalarie();
 ?>
 

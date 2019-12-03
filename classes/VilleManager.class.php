@@ -29,6 +29,22 @@ public function getListVille(){
 }
 
 
+public function getListVilleASupprimer(){
+
+  $listeVille =array();
+  $sql='SELECT vil_num, vil_nom FROM ville
+        WHERE vil_num not in ( SELECT v.vil_num from ville v join departement d on v.vil_num=d.vil_num)
+        ORDER BY vil_num desc';
+  $req= $this->db->query($sql);
+
+  while ($ville = $req->fetch(PDO::FETCH_OBJ)) {
+    $listeVille[] = new Ville($ville);
+  }
+
+  return $listeVille;
+  $req->closeCursor();
+}
+
 public function modifVille($ville){
       $req=$this->db->prepare(
       'UPDATE ville SET vil_num = :num, vil_nom = :nom WHERE vil_num= :num');

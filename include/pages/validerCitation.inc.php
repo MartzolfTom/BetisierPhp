@@ -34,7 +34,6 @@ foreach ($listeCitation as $citation) {
 
   $cit_num=$_GET['cit_num'];
   //$per_num_valide=
-echo $_SESSION['per_num'];
   $manager->validerCitation($cit_num,$_SESSION['per_num']);
 
   echo "validation effectué";
