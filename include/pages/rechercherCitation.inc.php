@@ -13,7 +13,7 @@ if (empty($_POST['cit_date_debut'])) {
 
   <form method ="post" action ="#">
 
-    Salarie : <select size="1" name="per_num"/>
+    Salarie : <select size="1" name="per_num">
     <option value="0" > Choissiez salarie </option><?php
     foreach ($listeSalarie as $personne) {  ?>
         <option value= <?php echo $personne->getPerNum(); ?>>  <?php echo $personne->getPerNom(); ?> </option> <?php }?>
@@ -22,8 +22,8 @@ if (empty($_POST['cit_date_debut'])) {
      Date citation entre:  <input type="date" name="cit_date_debut" value="<?php echo $managerCitation->getDatePlusAncienne();?>">
      et : <input type="date" name="cit_date_fin" value="<?php echo $managerCitation->getDateJour();?>">
 
-     Note citation entre : <input type="number" name="cit_note_debut" min="0" max="19" value="0" size="1">
-     et <input type="number" name="cit_note_fin" value="20" min="1" max="20" size="1"><br /><br />
+     Note citation entre : <input type="number" name="cit_note_debut" min="0" max="19" value="0" >
+     et <input type="number" name="cit_note_fin" value="20" min="1" max="20" ><br /><br />
 
 
         <input type="submit" name="Valider" />

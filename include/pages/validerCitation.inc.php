@@ -6,7 +6,7 @@ if (empty($_GET['cit_num'])) {
 
     ?>
 
-	<h1>Liste des citations déposées </h1>
+	<h1>Liste des citations à valider </h1>
 	<table>
    <tr>
      <th>Nom de l'enseignant</th>

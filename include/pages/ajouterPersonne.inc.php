@@ -19,7 +19,7 @@ if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_n
 		Mot de passe : <input type="password" name="per_pwd" value="Rahnon"> <br/> <br/>
 		Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
 		<input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
-		<input type="submit" name="" value="Valider">
+		<input type="submit" value="Valider">
 	</form>
 
 <!--Si l'on choisis etudiant-->

@@ -21,7 +21,7 @@ $nb_alea2 = rand(1, 9);
   <img src="image/nb/<?php echo $nb_alea1 ?>.jpg" alt="premierNombre"> +
   <img src="image/nb/<?php echo $nb_alea2 ?>.jpg" alt="secondNombre"> =
   <input type="text" name="resultat" value=""> <br/><br/>
-  <input type="submit" name="" value="Connexion"> <br/><br/>
+  <input type="submit" value="Connexion"> <br/><br/>
 </form>
 <?php
 }

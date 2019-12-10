@@ -29,6 +29,7 @@ body{
 	height:230px;
 	margin:left;
 	padding-left: 5%;
+
 }
 #logo{
 	float:left;
@@ -84,7 +85,8 @@ body{
 #corps{
 	float:left;
 	width: 100%;
-	background-color:#EDEDED;
+	background-color:#EDEDED;background: rgb(34,193,195);
+background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,45,161,1) 100%);
 }
 #menu{
 	float : left;
@@ -135,6 +137,7 @@ body{
 	color:#CCCCCC;
 	font-size:12px;
 	text-align:center;
+	
 }
 label{
 	font-size:12pt;

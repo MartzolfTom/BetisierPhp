@@ -32,7 +32,7 @@ foreach ($listeCitationPasNotees as $citation) {
 			</td>
 		</tr>
 				<?php }else{ ?>
-				<img src="image/erreur.png" alt="erreur"> </a>
+				<img src="image/erreur.png" alt="erreur">
 			</td>
     </tr>
 
