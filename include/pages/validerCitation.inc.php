@@ -4,8 +4,7 @@ $manager = new CitationManager($db);
 
 if (empty($_GET['cit_num'])) {
 
-?>
-
+    ?>
 
 	<h1>Liste des citations déposées </h1>
 	<table>
@@ -17,9 +16,9 @@ if (empty($_GET['cit_num'])) {
   </tr>
   <?php
 
-$listeCitation = $manager->getListCitationNonValides();
-foreach ($listeCitation as $citation) {
-    ?>
+    $listeCitation = $manager->getListCitationNonValides();
+    foreach ($listeCitation as $citation) {
+        ?>
     <tr>
       <td> <?php echo $citation->getCitPersonneCit(); ?> </td>
       <td> <?php echo $citation->getCitLibelle(); ?> </td>
@@ -28,13 +27,13 @@ foreach ($listeCitation as $citation) {
 					<img src="image/valid.png" alt="valider"> </a></td>
     </tr>
   <?php }
-?>
+    ?>
   </table>
 <?php } else {
 
-  $cit_num=$_GET['cit_num'];
-  //$per_num_valide=
-  $manager->validerCitation($cit_num,$_SESSION['per_num']);
+    $cit_num = $_GET['cit_num'];
+    //$per_num_valide=
+    $manager->validerCitation($cit_num, $_SESSION['per_num']);
 
-  echo "validation effectué";
-} ?>
+    echo "validation effectué";
+}?>

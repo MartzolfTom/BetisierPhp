@@ -7,7 +7,7 @@ $personneManager = new PersonneManager($db);
 
 <?php
 $nbPersonnes = $personneManager->nbpersonnes();
-echo 'Actuellement '.$nbPersonnes.' personnes enregistrées.'
+echo 'Actuellement ' . $nbPersonnes . ' personnes enregistrées.'
 ?>
 
 <table>
@@ -20,7 +20,7 @@ echo 'Actuellement '.$nbPersonnes.' personnes enregistrées.'
 
 $listePersonnes = $personneManager->getListPersonnes();
 foreach ($listePersonnes as $personne) {
-	?>
+    ?>
 	<tr>
 		<td> <?php echo $personne->getPerNom(); ?> </td>
 		<td> <?php echo $personne->getPerPrenom(); ?> </td>

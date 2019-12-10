@@ -68,22 +68,6 @@ public function getNumPersonne($personneSerialized){
   return $personne->per_num;
 }
 
-public function modifVille($ville){
-      $req=$this->db->prepare(
-      'UPDATE ville SET vil_num = :num, vil_nom = :nom WHERE vil_num= :num');
-      $req->bindValue(':num',$ville->getVilNum(),PDO::PARAM_INT);
-      $req->bindValue(':nom',$ville->getVilNom(),PDO::PARAM_STR);
-
-      $req->execute();
-}
-
-public function supprVille($ville){
-  $req=$this->db->prepare('DELETE FROM ville WHERE vil_num= :num');
-  $req->bindValue(':num',$ville->getVilNum(),PDO::PARAM_INT);
-
-  $req->execute();
-}
-
 public function nbpersonnes(){
     $req=$this->db->query('SELECT count(per_num) as nbpersonnes FROM personne');
     $donnees=$req->fetch();

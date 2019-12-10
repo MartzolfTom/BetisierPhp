@@ -36,7 +36,6 @@ foreach ($listeCitationPasNotees as $citation) {
 			</td>
     </tr>
 
-
   <?php  }
 				}foreach ($listeCitationDejaNotees as $citation) {
 	    ?>
@@ -50,9 +49,7 @@ foreach ($listeCitationPasNotees as $citation) {
 			  </td>
 	    </tr>
 
-
 	  <?php }
 	?>
-
 
   </table>

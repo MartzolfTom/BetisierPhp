@@ -3,7 +3,6 @@ $db = new Mypdo();
 $managerCitation = new CitationManager($db);
 $managerVote = new VoteManager($db);
 
-
 if (empty($_POST['note_citation'])) {
 ?>
 
