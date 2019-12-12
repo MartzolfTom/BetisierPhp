@@ -7,8 +7,8 @@ $etudiantManager = new EtudiantManager($db);
 $salarieManager = new SalarieManager($db);
 $fonctionManager = new FonctionManager($db);
 
-if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
-?>
+if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) { ?>
+
 	<h1>Ajouter une personne</h1>
 	<form action="#" method="post">
 		Nom : <input type="text" name="per_nom" value="Mare"> <br/> <br/>
@@ -22,8 +22,9 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 		<input type="submit" value="Valider">
 	</form>
 
-<!--Si l'on choisis etudiant-->
-<?php } else if (!empty($_POST['fonction'])) {
+<!--Si l'on choisis etudiant ou salarie et que l'on a bien rentre les champs-->
+<?php } else if (!empty($_POST['fonction']) && !empty($_POST['per_nom']) && !empty($_POST['per_pwd'])
+								&& !empty($_POST['per_tel']) && !empty($_POST['per_mail']) && !empty($_POST['per_login'])) {
 	$pwd = $_POST['per_pwd'];
 	$pwd_crypte = getPasswordCrypt($pwd);
 
@@ -65,56 +66,57 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 			</select> <br/> <br/>
 			<input type="submit" name="" value="Valider">
 		</form>
-<?php
-	}
+	<?php }
 
-//Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnes-->
+//Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnees
 } else if (!empty($_POST['div_num'])) {
 
-$personneManager->ajouterPersonne($_SESSION['personne']);
+	$personneManager->ajouterPersonne($_SESSION['personne']);
 
-//on recupere le per_num de la nouvel personne
-$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+	//on recupere le per_num de la nouvel personne
+	$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
 
-$etudiant = new Etudiant(
-						array(
-							'per_num' => $per_num,
-							'dep_num' => $_POST['dep_num'],
-							'div_num' => $_POST['div_num']
-						)
-);
+	$etudiant = new Etudiant(
+							array(
+								'per_num' => $per_num,
+								'dep_num' => $_POST['dep_num'],
+								'div_num' => $_POST['div_num']
+							)
+	);
 
-$etudiantManager->ajouterEtudiant($etudiant);
+	$etudiantManager->ajouterEtudiant($etudiant);
 
-//on n'oublie pas de libere le cookie personne maintenant inutile
-unset($_SESSION['personne']);
+	//on n'oublie pas de libere le cookie personne maintenant inutile
+	unset($_SESSION['personne']); ?>
 
-?>
-L'Etudiant a bien été ajouté !
+	L'Etudiant a bien été ajouté !
 
-<!--Cas ou l'on choisi salarie-->
+<!--Apres avoir valider le salarie, on enregistre dans les tables personne et salarie les donnees-->
 <?php } else if(!empty($_POST['fon_num'])){
 
-$personneManager->ajouterPersonne($_SESSION['personne']);
+	$personneManager->ajouterPersonne($_SESSION['personne']);
 
-//on recupere le per_num de la nouvel personne
-$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
-$sal_telprof = $_POST['sal_telprof'];
+	//on recupere le per_num de la nouvel personne
+	$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+	$sal_telprof = $_POST['sal_telprof'];
 
-$salarie = new Salarie(
-						array(
-							'per_num' => $per_num,
-							'sal_telprof' => $sal_telprof,
-							'fon_num' => $_POST['fon_num']
-						)
-);
+	$salarie = new Salarie(
+							array(
+								'per_num' => $per_num,
+								'sal_telprof' => $sal_telprof,
+								'fon_num' => $_POST['fon_num']
+							)
+	);
+	$salarieManager->ajouterSalarie($salarie);
+	//on n'oublie pas de liberer le cookie personne maintenant inutile
+	unset($_SESSION['personne']); ?>
 
-$salarieManager->ajouterSalarie($salarie);
+	Le salarie a bien été rajouté !!
 
-//on n'oublie pas de liberer le cookie personne maintenant inutile
-unset($_SESSION['personne']);
-?>
-Le salarie a bien été rajouté !!
-<?php
-}
-?>
+<?php } else {
+
+	header("Refresh: 2; url=index.php?page=2");?>
+	Vous n'avez pas rentré les champs correctement !
+	Redirection dans 2 secondes
+
+<?php } ?>
