@@ -1,5 +1,5 @@
 <?php
-$_SESSION['per_num'] = null;
+$_SESSION['perNumConnexion'] = null;
 $_SESSION['connexion'] = false;
 $_SESSION['per_login'] = "none";
 $_SESSION['estSalarie'] = null;

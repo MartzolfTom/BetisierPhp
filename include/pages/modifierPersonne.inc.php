@@ -12,7 +12,7 @@ $_SESSION['per_num'] = $_GET['per_num'];
 $detailsEtudiant = $etudiantManager->getDetailEtudiant($_SESSION['per_num']);
 $detailsSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
 
-if(empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
+if(empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
 
 $detailsPersonne = $personneManager->getDetailModifierPersonne($_SESSION['per_num']);
 ?>
@@ -25,39 +25,56 @@ $detailsPersonne = $personneManager->getDetailModifierPersonne($_SESSION['per_nu
   Mail : <input type="text" name="per_mail" value="<?php echo $detailsPersonne->per_mail ?>"> <br/> <br/>
   Login : <input type="text" name="per_login" value="<?php echo $detailsPersonne->per_login ?>"> <br/> <br/>
   Mot de passe : <input type="password" name="per_pwd" value=""> <br/> <br/>
-  Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
-  <input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
-  <input type="submit" name="" value="Valider">
+  Catégorie : <input type="radio" name="fonction" value="etu"> Etudiant
+  <input type="radio" name="fonction" value="sal"> Salarie <br/> <br/>
+  <input type="submit" value="Valider">
 </form>
 
-<?php } else if (!empty($_POST['etudiant'])) {
+<?php } else if (!empty($_POST['fonction'])) {
 
-$pwd = $_POST['per_pwd'];
-$pwd_crypte = getPasswordCrypt($pwd);
+  $pwd = $_POST['per_pwd'];
+  $pwd_crypte = getPasswordCrypt($pwd);
 
-creerPersonne($pwd_crypte);
+  creerPersonne($pwd_crypte);
 
-?>
-	<h1>Modifier un étudiant</h1>
-	<form action="#" method="post">
-		Année : <select name="div_num">
-			<?php
-			$listeDivisions = $divisionManager->getListDivisions();
-			foreach ($listeDivisions as $division) { ?>
-				<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		Département : <select name="dep_num">
-		<?php
-			$listeDepartements = $departementManager->getListDepartements();
-			foreach ($listeDepartements as $departement) { ?>
-				<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		<input type="submit" name="" value="Valider">
-	</form>
+  if ($_POST['fonction'] == "etu") { ?>
+    <h1>Modifier un étudiant</h1>
+    <form action="#" method="post">
+    Année : <select name="div_num">
+    <?php
+    $listeDivisions = $divisionManager->getListDivisions();
+    foreach ($listeDivisions as $division) { ?>
+      <option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
+      <?php	}
+      ?>
+      </select> <br/> <br/>
+      Département : <select name="dep_num">
+      <?php
+      $listeDepartements = $departementManager->getListDepartements();
+      foreach ($listeDepartements as $departement) { ?>
+        <option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
+        <?php	}
+        ?>
+        </select> <br/> <br/>
+        <input type="submit" value="Valider">
+        </form>
+  <?php } else { ?>
+  <h1>Modifier un salarié</h1>
+
+  <form action="#" method="post">
+    Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
+    Fonction : <select name="fon_num">
+      <?php
+      $listeFonctions = $fonctionManager->getListFonctions();
+      foreach ($listeFonctions as $fonction) { ?>
+        <option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
+    <?php	}
+    ?>
+    </select> <br/> <br/>
+    <input type="submit" value="Valider">
+  </form>
+
+  <?php } ?>
 
 <!--Apres avoir valider l'etudiant, on modifie dans les tables personne et etudiant les donnes-->
 <?php } else if (!empty($_POST['div_num'])){
@@ -82,36 +99,12 @@ else {
   $etudiantManager->ajouterEtudiant($etudiant);
 }
 
-//on n'oublie pas de libere le cookie personne maintenant inutile
+//on n'oublie pas de libere le cookie personne et per_num maintenant inutile
 unset($_SESSION['personne']);
 unset($_SESSION['per_num']);
 
 ?>
 L'Etudiant a bien été modifié !
-
-
-<!--Cas ou l'on choisi salarie-->
-<?php } else if (!empty($_POST['salarie'])){
-$pwd = $_POST['per_pwd'];
-$pwd_crypte = getPasswordCrypt($pwd);
-
-creerPersonne($pwd_crypte);
-
-?>
-	<h1>Modifier un salarié</h1>
-
-	<form action="#" method="post">
-		Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
-		Fonction : <select name="fon_num">
-			<?php
-			$listeFonctions = $fonctionManager->getListFonctions();
-			foreach ($listeFonctions as $fonction) { ?>
-				<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		<input type="submit" name="" value="Valider">
-	</form>
 
 <!--Après avoir valider le salarie, on enregistre les donnees dans notre base de donnees-->
 <?php } else if(!empty($_POST['fon_num'])){
