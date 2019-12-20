@@ -9,7 +9,6 @@ if (empty($_SESSION['perNumConnexion'])) {
 }
 
 ?>
-<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">

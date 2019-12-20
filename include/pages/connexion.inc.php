@@ -48,6 +48,7 @@ else if(!empty($_POST['per_login'])){
 
   } else {
     echo "Connexion échouée. Mot de passe, login invalide ou mauvais Capcha";
+    header("Refresh: 2; url=index.php?page=14");
   }
 
 }

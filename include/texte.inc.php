@@ -35,9 +35,12 @@ switch ($page) {
     case 4:
         if ($_SESSION['estAdmin']) {
             // inclure ici la page suppression personnes
-            include_once 'pages/supprimerPersonne.inc.php';
+            include_once 'pages/supprimerPersonnes.inc.php';
         }
         break;
+    case 19:
+      include_once 'pages/supprimerPersonne.inc.php';
+      break;
     //seconde page de modifier personne
     case 16:
         //inclure ici la page permettant de modifier une personnes
