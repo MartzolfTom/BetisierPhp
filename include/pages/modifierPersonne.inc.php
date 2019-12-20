@@ -122,6 +122,7 @@ if(empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_nu
 
   //si la personne est deja salarie ou non
   //on applique les changements adequats
+  
   if (!empty($detailSalarie)) {
     $salarieManager->modifierSalarie($salarie);
   }

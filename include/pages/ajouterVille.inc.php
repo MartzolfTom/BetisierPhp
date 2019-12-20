@@ -14,7 +14,7 @@ if (empty($_POST['vil_nom'])) {
         <input type="submit" name="Valider" />
   </form>
 <?php } else {
-
+// une fois le nom saisie on ajoute la ville à la base de
     $tab = array('vil_nom' => $_POST['vil_nom']);
     $ville = new Ville($tab);
 

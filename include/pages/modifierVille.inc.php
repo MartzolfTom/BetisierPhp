@@ -7,9 +7,7 @@ if (!empty($_POST['vil_num'])) {
   $_SESSION['vil_num']=$_POST['vil_num'];
 }
 ?>
-
 	<h1>Modifier une ville</h1>
-
 <?php
 if (empty($_POST['vil_num']) && empty($_POST['nom_ville_modif'])) {
     ?>
@@ -36,9 +34,7 @@ foreach ($listeVille as $ville) {
 <?php
 } else {
   $tab = array('vil_num' => $_SESSION['vil_num'], 'vil_nom' => $_POST['nom_ville_modif']);
-
   $ville = new Ville($tab);
-
   $manager->modifVille($ville);
 
   echo "modification effectué";

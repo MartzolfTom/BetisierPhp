@@ -1,7 +1,6 @@
 <?php
 class Personne
 {
-
     private $per_num;
     private $per_nom;
     private $per_prenom;
@@ -11,7 +10,6 @@ class Personne
     private $per_login;
     private $per_pwd;
 
-
     public function __construct($valeurs = array())
     {
         if (!empty($valeurs)) {
@@ -20,7 +18,7 @@ class Personne
     }
 
     public function affecte($valeurs)
-    { 
+    {
         foreach ($valeurs as $attribut => $valeur) {
             switch ($attribut) {
                 case 'per_num':
@@ -51,11 +49,11 @@ class Personne
         }
     }
 
-
-    public static function hashPassword($p) {
-		define("SALT", "48@!alsd");
-		return sha1(sha1($p) . SALT);
-	}
+    public static function hashPassword($p)
+    {
+        define("SALT", "48@!alsd");
+        return sha1(sha1($p) . SALT);
+    }
 
     public function getPerNum()
     {
@@ -69,12 +67,10 @@ class Personne
         return $this;
     }
 
-
     public function getPerNom()
     {
         return $this->per_nom;
     }
-
 
     public function setPerNom($per_nom)
     {
@@ -131,7 +127,6 @@ class Personne
         return $this;
     }
 
-
     public function getPerLogin()
     {
         return $this->per_login;
@@ -149,7 +144,6 @@ class Personne
         return $this->per_pwd;
     }
 
-
     public function setPerPwd($per_pwd)
     {
         $this->per_pwd = $per_pwd;
@@ -157,4 +151,4 @@ class Personne
         return $this;
     }
 
-}?>
+}

@@ -6,7 +6,6 @@ $managerVote = new VoteManager($db);
 if (empty($_POST['note_citation'])) {
 ?>
 
-
 	<h1> Noter citation </h1>
 	<table>
    <tr>
@@ -25,7 +24,6 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
     </tr>
   </table>
 
-
     <form method ="post" action ="#">
 
       Note : <input type="number" name="note_citation" min="0" max="20" value="10"/>
@@ -36,7 +34,6 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
   }else{
 
-
     $tab = array( 'cit_num' => $_GET['cit_num'],
                   'per_num' => $_SESSION['perNumConnexion'],
                   'vot_valeur' => $_POST['note_citation']);
@@ -45,6 +42,5 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
     $managerVote->ajouterNote($vote);
     echo "La note a été ajouté";
-
 
   } ?>

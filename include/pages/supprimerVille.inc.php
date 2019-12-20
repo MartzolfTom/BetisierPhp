@@ -2,7 +2,6 @@
 $db = new Mypdo();
 $manager = new VilleManager($db);
 $listeVille = $manager->getListVilleASupprimer();
-
 ?>
 
 	<h1>Supprimer une ville</h1>
@@ -23,11 +22,9 @@ foreach ($listeVille as $ville) {
  <input type="submit" name="Valider" />
 </form>
 <?php } else {
-
+		//suppression de la ville selectionne
     $tab = array('vil_num' => $_POST['vil_num']);
-
     $ville = new Ville($tab);
-
     $manager->supprVille($ville);
 
     echo "suppression effectué";

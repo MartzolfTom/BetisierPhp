@@ -28,7 +28,6 @@ public function getListVille(){
   $req->closeCursor();
 }
 
-
 public function getListVilleASupprimer(){
 
   $listeVille =array();
@@ -60,7 +59,6 @@ public function supprVille($ville){
 
   $req->execute();
 }
-
 
 public function nomVille($vil_num){
     $req=$this->db->query('SELECT vil_nom as nom FROM ville WHERE vil_num='.$vil_num.'');

@@ -1,7 +1,6 @@
 <?php
 class Fonction
 {
-
     private $fon_num;
     private $fon_libelle;
 
@@ -51,7 +50,6 @@ class Fonction
 
         return $this;
     }
-
 }
 
 ?>

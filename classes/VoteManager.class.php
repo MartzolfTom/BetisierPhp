@@ -12,7 +12,7 @@ public function ajouterNote($vote){
     $req->bindValue(':citnum',$vote->getCitNum(),PDO::PARAM_INT);
     $req->bindValue(':pernum',$vote->getPerNum(),PDO::PARAM_INT);
     $req->bindValue(':vote',$vote->getVotValeur(),PDO::PARAM_INT);
-    
+
     $req->execute();
 }
 

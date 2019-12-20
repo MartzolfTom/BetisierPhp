@@ -3,10 +3,10 @@ class Mypdo extends PDO
 {
 
 	protected $dbo;
-
+		
 	public function __construct ()
 	{
-	 // le paramétrage de cette classe se fait dans le fichier config.inc.php
+	 // le paramï¿½trage de cette classe se fait dans le fichier config.inc.php
 		if (ENV=='dev'){
 			$bool=true;
 		}
@@ -22,12 +22,11 @@ class Mypdo extends PDO
 
 		}
 		catch (PDOException $e) {
-			echo 'Échec lors de la connexion : ' . $e->getMessage();
+			echo 'ï¿½chec lors de la connexion : ' . $e->getMessage();
 		}
 
 	}
-	
+
 }
 
 ?>
-

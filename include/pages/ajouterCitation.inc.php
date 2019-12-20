@@ -56,7 +56,7 @@ if (empty($_POST['cit_libelle'])) {
   $tab = array('per_num' => $_POST['per_num'],
                'cit_date' => $_POST['cit_date'],
                'cit_libelle' => $_POST['cit_libelle'],
-               'per_num_etu' => $_SESSION['per_num'],
+               'per_num_etu' => $_SESSION['perNumConnexion'],
                'cit_date_depo' => $_POST['cit_date'],);
 
   $citation = new Citation($tab);

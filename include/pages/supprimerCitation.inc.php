@@ -20,14 +20,12 @@ foreach ($listeCitation as $citation) {
 
  </select>
  <input type="submit" name="Valider" />
-</form>
-<?php } else {
+ </form>
+ <?php } else {
 
     $tab = array('cit_num' => $_POST['cit_num']);
-
     $citation = new Citation($tab);
-
-   $manager->supprimerCitation($citation);
+    $manager->supprimerCitation($citation);
 
     echo "suppression effectué";
 }

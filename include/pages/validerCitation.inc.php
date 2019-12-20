@@ -3,7 +3,6 @@ $db = new Mypdo();
 $manager = new CitationManager($db);
 
 if (empty($_GET['cit_num'])) {
-
     ?>
 
 	<h1>Liste des citations à valider </h1>
@@ -32,7 +31,6 @@ if (empty($_GET['cit_num'])) {
 <?php } else {
 
     $cit_num = $_GET['cit_num'];
-    //$per_num_valide=
     $manager->validerCitation($cit_num, $_SESSION['perNumConnexion']);
 
     echo "validation effectué";

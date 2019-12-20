@@ -115,7 +115,6 @@ public function getDatePlusAncienne(){
     return $donnees['datePlusAncienne'];
 }
 
-
 public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin){
 
   $listeCitation =array();
@@ -138,7 +137,6 @@ public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,
   return $listeCitation;
   $req->closeCursor();
 }
-
 
 public function getListCitationNonValides(){
 

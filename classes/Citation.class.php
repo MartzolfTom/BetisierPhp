@@ -1,7 +1,6 @@
 <?php
 class Citation
 {
-
     private $cit_num;
     private $per_num;
     private $per_num_valide;
@@ -11,7 +10,6 @@ class Citation
     private $cit_valide;
     private $cit_date_valide;
     private $cit_date_depo;
-
     private $cit_personne_cité;
     private $cit_moy_notes;
 

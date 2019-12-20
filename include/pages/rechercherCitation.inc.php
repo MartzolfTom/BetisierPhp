@@ -5,7 +5,6 @@ $managerPersonne = new PersonneManager($db);
 $listeSalarie = $managerPersonne->getListSalarie();
 ?>
 
-
 <?php
 if (empty($_POST['cit_date_debut'])) {
     ?>
@@ -25,7 +24,6 @@ if (empty($_POST['cit_date_debut'])) {
      Note citation entre : <input type="number" name="cit_note_debut" min="0" max="19" value="0" >
      et <input type="number" name="cit_note_fin" value="20" min="1" max="20" ><br /><br />
 
-
         <input type="submit" name="Valider" />
   </form>
 <?php } else {
@@ -36,7 +34,6 @@ if (empty($_POST['cit_date_debut'])) {
     $cit_note_debut=$_POST['cit_note_debut'];
     $cit_note_fin=$_POST['cit_note_fin'];
     $listeRechercheCitation = $managerCitation->getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin);
-
 ?>
     <h1>Resultat de la recherche des citations  </h1>
     <?php

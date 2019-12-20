@@ -26,7 +26,8 @@ foreach ($listeCitationPasNotees as $citation) {
 			<td> <?php echo $citation->getCitDate(); ?> </td>
 			<td> <?php echo $citation->getCitMoyNotes(); ?> </td>
 			<td>
-				<?php if ($_SESSION['estEtudiant']){ ?>
+				<?php if ($_SESSION['estEtudiant']){
+					//vérification du statut etudiant pour pouvoir noter les citations?>
 				<a href="index.php?page=17&cit_num=<?php echo $citation->getCitNum(); ?>" >
 				<img src="image/modifier.png" alt="petitCrayon"> </a>
 			</td>
