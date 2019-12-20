@@ -40,7 +40,7 @@ class EtudiantManager {
 
     $req= $this->db->query($sql);
 
-    $detailEtudiant[] = $req->fetch(PDO::FETCH_OBJ);
+    $detailEtudiant = $req->fetch(PDO::FETCH_OBJ);
     return $detailEtudiant;
 
     $req->closeCursor();

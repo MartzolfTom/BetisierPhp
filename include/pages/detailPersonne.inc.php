@@ -18,7 +18,7 @@ if(!empty($detailEtudiant)){ ?>
    <th>Département</th>
    <th>Ville</th>
 </tr>
-<?php }else { ?>
+<?php } else { ?>
   <h1>Détail sur le salarié <?php echo $_GET['per_nom'] ?></h1>
   <table>
    <tr>
@@ -36,18 +36,13 @@ if(!empty($detailEtudiant)){ ?>
   <td>  <?php echo $personne->getPerMail(); ?></td>
   <td>  <?php echo $personne->getPerTel(); ?></td>
 <?php }
-if(!empty($detailEtudiant)){
-  foreach ($detailEtudiant as $etudiant) { ?>
-  <td> <?php echo $etudiant->getDepNom(); ?> </td>
-  <td> <?php echo $etudiant->getVilNom(); ?> </td>
+if(!empty($detailEtudiant)){ ?>
+  <td><?php echo $detailEtudiant->dep_nom ?></td>
+  <td><?php echo $detailEtudiant->vil_nom ?></td>
 <?php
-  }
-} else {
-  foreach ($detailSalarie as $salarie) { ?>
-  <td> <?php echo $salarie->getSalTelprof(); ?> </td>
-  <td> <?php echo $salarie->getFonLibelle(); ?> </td>
-<?php
-  }
-}?>
+} else { ?>
+  <td><?php echo $detailSalarie->sal_telprof ?></td>
+  <td><?php echo $detailSalarie->fon_libelle ?></td>
+<?php } ?>
 </tr>
 </table>
