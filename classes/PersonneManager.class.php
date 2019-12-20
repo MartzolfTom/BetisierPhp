@@ -55,6 +55,14 @@ class PersonneManager{
     $req->closeCursor();
   }
 
+  public function getLogin($per_login){
+    $sql = "SELECT * FROM personne p WHERE per_login = '$per_login'";
+    $req = $this->db->query($sql);
+    $loginDansBase = $req->fetch(PDO::FETCH_OBJ);
+
+    return $loginDansBase;
+  }
+
   public function getNumPersonne($personneSerialized){
     $personne = unserialize($personneSerialized);
 

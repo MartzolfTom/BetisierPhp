@@ -25,48 +25,55 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 <!--Si l'on choisis etudiant ou salarie et que l'on a bien rentre les champs-->
 <?php } else if (!empty($_POST['fonction']) && !empty($_POST['per_nom']) && !empty($_POST['per_pwd'])
 								&& !empty($_POST['per_tel']) && !empty($_POST['per_mail']) && !empty($_POST['per_login'])) {
-	$pwd = $_POST['per_pwd'];
-	$pwd_crypte = getPasswordCrypt($pwd);
+	if (!empty($personneManager->getLogin($_POST['per_login']))) { ?>
+		<p>Ce login est déjà pris !!</p>
+	<?php
+	} else {
 
-	creerPersonne($pwd_crypte);
+		$pwd = $_POST['per_pwd'];
+		$pwd_crypte = getPasswordCrypt($pwd);
 
-	if ($_POST['fonction']=="etu") { ?>
-		<h1>Ajouter un étudiant</h1>
-		<form action="#" method="post">
-			Année : <select name="div_num">
-				<?php
-				$listeDivisions = $divisionManager->getListDivisions();
-				foreach ($listeDivisions as $division) { ?>
-					<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
-				<?php	}
-				?>
-			</select> <br/> <br/>
-			Département : <select name="dep_num">
-				<?php
-				$listeDepartements = $departementManager->getListDepartements();
-				foreach ($listeDepartements as $departement) { ?>
-					<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
-				<?php	}
-				?>
-			</select> <br/> <br/>
-			<input type="submit" name="" value="Valider">
-		</form>
-	<?php } else { ?>
-		<h1>Ajouter un salarié</h1>
+		creerPersonne($pwd_crypte);
 
-		<form action="#" method="post">
-			Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
-			Fonction : <select name="fon_num">
-				<?php
-				$listeFonctions = $fonctionManager->getListFonctions();
-				foreach ($listeFonctions as $fonction) { ?>
-					<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
-				<?php	}
-				?>
-			</select> <br/> <br/>
-			<input type="submit" name="" value="Valider">
-		</form>
-	<?php }
+		if ($_POST['fonction']=="etu") { ?>
+			<h1>Ajouter un étudiant</h1>
+			<form action="#" method="post">
+				Année : <select name="div_num">
+					<?php
+					$listeDivisions = $divisionManager->getListDivisions();
+					foreach ($listeDivisions as $division) { ?>
+						<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
+					<?php	}
+					?>
+				</select> <br/> <br/>
+				Département : <select name="dep_num">
+					<?php
+					$listeDepartements = $departementManager->getListDepartements();
+					foreach ($listeDepartements as $departement) { ?>
+						<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
+					<?php	}
+					?>
+				</select> <br/> <br/>
+				<input type="submit" name="" value="Valider">
+			</form>
+		<?php } else { ?>
+			<h1>Ajouter un salarié</h1>
+
+			<form action="#" method="post">
+				Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
+				Fonction : <select name="fon_num">
+					<?php
+					$listeFonctions = $fonctionManager->getListFonctions();
+					foreach ($listeFonctions as $fonction) { ?>
+						<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
+					<?php	}
+					?>
+				</select> <br/> <br/>
+				<input type="submit" name="" value="Valider">
+			</form>
+		<?php }
+	}
+
 
 //Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnees
 } else if (!empty($_POST['div_num'])) {
@@ -116,7 +123,7 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 <?php } else {
 
 	header("Refresh: 2; url=index.php?page=2");?>
-	Vous n'avez pas rentré les champs correctement !
+	Vous n'avez pas rentré les champs correctement, ou un login déjà existant !
 	Redirection dans 2 secondes
 
 <?php } ?>
