@@ -3,14 +3,11 @@ $db = new Mypdo();
 $managerPersonne = new PersonneManager($db);
 $managerEtudiant = new EtudiantManager($db);
 $managerSalarie = new SalarieManager($db);
-?>
 
-<?php
 $detailEtudiant = $managerEtudiant->getDetailEtudiant($_GET['per_num']);
-$detailPersonne=$managerPersonne-> getDetailPersonne($_GET['per_num']);
-$detailSalarie=$managerSalarie-> getDetailSalarie($_GET['per_num']);
-  ?>
-<?php
+$detailPersonne=$managerPersonne->getDetailPersonne($_GET['per_num']);
+$detailSalarie=$managerSalarie->getDetailSalarie($_GET['per_num']);
+
 if(!empty($detailEtudiant)){ ?>
 <h1>Détail sur l'étudiant <?php echo $_GET['per_nom'] ?></h1>
 <table>

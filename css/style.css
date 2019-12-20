@@ -188,7 +188,12 @@ table, th, td {
 	width: 200px;
 	height: auto;
 }
-label
-{
+
+#imagePanneau {
+	height: 200px;
+	width: auto;
+}
+
+label {
    display:block;
 }

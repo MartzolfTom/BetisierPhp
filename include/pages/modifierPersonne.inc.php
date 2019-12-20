@@ -138,7 +138,7 @@ if(empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_nu
 
 <?php } else {
 
-	header("Refresh: 2; url=index.php?page=2");?>
+	header("Refresh: 2; url=index.php?page=3");?>
 	Vous n'avez pas rentré les champs correctement !
 	Redirection dans 2 secondes
 
