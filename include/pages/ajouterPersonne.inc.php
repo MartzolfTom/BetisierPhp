@@ -7,8 +7,8 @@ $etudiantManager = new EtudiantManager($db);
 $salarieManager = new SalarieManager($db);
 $fonctionManager = new FonctionManager($db);
 
-if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) {
-?>
+if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_num']) && empty($_POST['fon_num'])) { ?>
+
 	<h1>Ajouter une personne</h1>
 	<form action="#" method="post">
 		Nom : <input type="text" name="per_nom" value="Mare"> <br/> <br/>
@@ -17,113 +17,106 @@ if (empty($_POST['etudiant']) && empty($_POST['salarie']) && empty($_POST['div_n
 		Mail : <input type="text" name="per_mail" value="dorianmare@yahoo.fr"> <br/> <br/>
 		Login : <input type="text" name="per_login" value="MichouDu87"> <br/> <br/>
 		Mot de passe : <input type="password" name="per_pwd" value="Rahnon"> <br/> <br/>
-		Catégorie : <input type="radio" name="etudiant" value="etu"> Etudiant
-		<input type="radio" name="salarie" value="sal"> Salarie <br/> <br/>
+		Catégorie : <input type="radio" name="fonction" value="etu"> Etudiant
+		<input type="radio" name="fonction" value="sal"> Salarie <br/> <br/>
 		<input type="submit" value="Valider">
 	</form>
 
-<!--Si l'on choisis etudiant-->
-<?php } else if (!empty($_POST['etudiant'])) {
+<!--Si l'on choisis etudiant ou salarie et que l'on a bien rentre les champs-->
+<?php } else if (!empty($_POST['fonction']) && !empty($_POST['per_nom']) && !empty($_POST['per_pwd'])
+								&& !empty($_POST['per_tel']) && !empty($_POST['per_mail']) && !empty($_POST['per_login'])) {
+	$pwd = $_POST['per_pwd'];
+	$pwd_crypte = getPasswordCrypt($pwd);
 
-$pwd = $_POST['per_pwd'];
-$pwd_crypte = getPasswordCrypt($pwd);
+	creerPersonne($pwd_crypte);
 
-creerPersonne($pwd_crypte);
+	if ($_POST['fonction']=="etu") { ?>
+		<h1>Ajouter un étudiant</h1>
+		<form action="#" method="post">
+			Année : <select name="div_num">
+				<?php
+				$listeDivisions = $divisionManager->getListDivisions();
+				foreach ($listeDivisions as $division) { ?>
+					<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
+				<?php	}
+				?>
+			</select> <br/> <br/>
+			Département : <select name="dep_num">
+				<?php
+				$listeDepartements = $departementManager->getListDepartements();
+				foreach ($listeDepartements as $departement) { ?>
+					<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
+				<?php	}
+				?>
+			</select> <br/> <br/>
+			<input type="submit" name="" value="Valider">
+		</form>
+	<?php } else { ?>
+		<h1>Ajouter un salarié</h1>
 
-?>
-	<h1>Ajouter un étudiant</h1>
-	<form action="#" method="post">
-		Année : <select name="div_num">
-			<?php
-			$listeDivisions = $divisionManager->getListDivisions();
-			foreach ($listeDivisions as $division) { ?>
-				<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		Département : <select name="dep_num">
-		<?php
-			$listeDepartements = $departementManager->getListDepartements();
-			foreach ($listeDepartements as $departement) { ?>
-				<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		<input type="submit" name="" value="Valider">
-	</form>
+		<form action="#" method="post">
+			Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
+			Fonction : <select name="fon_num">
+				<?php
+				$listeFonctions = $fonctionManager->getListFonctions();
+				foreach ($listeFonctions as $fonction) { ?>
+					<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
+				<?php	}
+				?>
+			</select> <br/> <br/>
+			<input type="submit" name="" value="Valider">
+		</form>
+	<?php }
 
-<!--Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnes-->
-<?php } else if (!empty($_POST['div_num'])){
+//Apres avoir valider l'etudiant, on enregistre dans les tables personne et etudiant les donnees
+} else if (!empty($_POST['div_num'])) {
 
-$personneManager->ajouterPersonne($_SESSION['personne']);
+	$personneManager->ajouterPersonne($_SESSION['personne']);
 
-//on recupere le per_num de la nouvel personne
-$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+	//on recupere le per_num de la nouvel personne
+	$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
 
-$etudiant = new Etudiant(
-						array(
-							'per_num' => $per_num,
-							'dep_num' => $_POST['dep_num'],
-							'div_num' => $_POST['div_num']
-						)
-);
+	$etudiant = new Etudiant(
+							array(
+								'per_num' => $per_num,
+								'dep_num' => $_POST['dep_num'],
+								'div_num' => $_POST['div_num']
+							)
+	);
 
-$etudiantManager->ajouterEtudiant($etudiant);
+	$etudiantManager->ajouterEtudiant($etudiant);
 
-//on n'oublie pas de libere le cookie personne maintenant inutile
-unset($_SESSION['personne']);
+	//on n'oublie pas de libere le cookie personne maintenant inutile
+	unset($_SESSION['personne']); ?>
 
-?>
-L'Etudiant a bien été ajouté !
+	L'Etudiant a bien été ajouté !
 
-<!--Cas ou l'on choisi salarie-->
-<?php } else if (!empty($_POST['salarie'])){
-
-$pwd = $_POST['per_pwd'];
-$pwd_crypte = getPasswordCrypt($pwd);
-
-creerPersonne($pwd_crypte);
-
-?>
-	<h1>Ajouter un salarié</h1>
-
-	<form action="#" method="post">
-		Téléphone professionel : <input type="text" name="sal_telprof" value="0506070810"> <br/> <br/>
-		Fonction : <select name="fon_num">
-			<?php
-			$listeFonctions = $fonctionManager->getListFonctions();
-			foreach ($listeFonctions as $fonction) { ?>
-				<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
-		<?php	}
-		?>
-		</select> <br/> <br/>
-		<input type="submit" name="" value="Valider">
-	</form>
-
-<!--Après avoir valider le salarie, on enregistre les donnees dans notre base de donnees-->
+<!--Apres avoir valider le salarie, on enregistre dans les tables personne et salarie les donnees-->
 <?php } else if(!empty($_POST['fon_num'])){
 
-$personneManager->ajouterPersonne($_SESSION['personne']);
+	$personneManager->ajouterPersonne($_SESSION['personne']);
 
-//on recupere le per_num de la nouvel personne
-$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
-$sal_telprof = $_POST['sal_telprof'];
+	//on recupere le per_num de la nouvel personne
+	$per_num = $personneManager->getNumPersonne($_SESSION['personne']);
+	$sal_telprof = $_POST['sal_telprof'];
 
-$salarie = new Salarie(
-						array(
-							'per_num' => $per_num,
-							'sal_telprof' => $sal_telprof,
-							'fon_num' => $_POST['fon_num']
-						)
-);
+	$salarie = new Salarie(
+							array(
+								'per_num' => $per_num,
+								'sal_telprof' => $sal_telprof,
+								'fon_num' => $_POST['fon_num']
+							)
+	);
+	$salarieManager->ajouterSalarie($salarie);
+	//on n'oublie pas de liberer le cookie personne maintenant inutile
+	unset($_SESSION['personne']); ?>
 
-$salarieManager->ajouterSalarie($salarie);
+	Le salarie a bien été rajouté !!
 
-//on n'oublie pas de liberer le cookie personne maintenant inutile
-unset($_SESSION['personne']);
-?>
-Le salarie a bien été rajouté !!
+<?php } else {
 
-<?php
-}
-?>
+	header("Refresh: 2; url=index.php?page=2");?>
+	Vous n'avez pas rentré les champs correctement !
+	Redirection dans 2 secondes
+
+<?php } ?>

@@ -33,7 +33,7 @@ if (empty($_GET['cit_num'])) {
 
     $cit_num = $_GET['cit_num'];
     //$per_num_valide=
-    $manager->validerCitation($cit_num, $_SESSION['per_num']);
+    $manager->validerCitation($cit_num, $_SESSION['perNumConnexion']);
 
     echo "validation effectué";
 }?>

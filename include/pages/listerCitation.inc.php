@@ -15,8 +15,8 @@ $manager = new CitationManager($db);
   </tr>
   <?php
 
-$listeCitationPasNotees = $manager->getListCitationPasNotées($_SESSION['per_num']);
-$listeCitationDejaNotees = $manager->getListCitationDejaNotées($_SESSION['per_num']);
+$listeCitationPasNotees = $manager->getListCitationPasNotées($_SESSION['perNumConnexion']);
+$listeCitationDejaNotees = $manager->getListCitationDejaNotées($_SESSION['perNumConnexion']);
 
 foreach ($listeCitationPasNotees as $citation) {
     ?>

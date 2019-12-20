@@ -38,7 +38,7 @@ $citation = $managerCitation->getDetailCitation($_GET['cit_num']);
 
 
     $tab = array( 'cit_num' => $_GET['cit_num'],
-                  'per_num' => $_SESSION['per_num'],
+                  'per_num' => $_SESSION['perNumConnexion'],
                   'vot_valeur' => $_POST['note_citation']);
 
     $vote = new Vote($tab);

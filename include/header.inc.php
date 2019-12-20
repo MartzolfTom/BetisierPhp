@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (empty($_SESSION['per_num'])) {
-  $_SESSION['per_num'] = 0;
+if (empty($_SESSION['perNumConnexion'])) {
+  $_SESSION['perNumConnexion'] = 0;
   $_SESSION['connexion'] = false;
   $_SESSION['per_login'] = "none";
   $_SESSION['estEtudiant'] = null;
@@ -26,7 +26,7 @@ if (empty($_SESSION['per_num'])) {
     <img src="image/yoda.gif" width="250" height="125" id="yoda" frameBorder="0"></img>
 		<div id="connect">
       <?php
-      if (empty($_SESSION['per_num'])) {
+      if (empty($_SESSION['perNumConnexion'])) {
         echo '<a href="index.php?page=14">Connexion</a>';
       }
       else{

@@ -31,10 +31,10 @@ else if(!empty($_POST['per_login'])){
 
     $_SESSION['per_login'] = $_POST['per_login'];
     $_SESSION['connexion'] = true;
-    $_SESSION['per_num'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_num;
+    $_SESSION['perNumConnexion'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_num;
     $_SESSION['estAdmin'] = $connexionManager->connexion($_POST['pwd'], $_POST['per_login'])->per_admin;
 
-    $detailSalarie = $salarieManager->getDetailSalarie($_SESSION['per_num']);
+    $detailSalarie = $salarieManager->getDetailSalarie($_SESSION['perNumConnexion']);
 
     if ($detailSalarie) {
       $_SESSION['estEtudiant'] = false;
