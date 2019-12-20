@@ -8,8 +8,8 @@ public function __construct($db){
 
 public function add($citation){
   $req=$this->db->prepare(
-    'INSERT INTO citation (per_num,per_num_etu, cit_date, cit_libelle,cit_date_depo)
-      VALUES(:num,:num_etu,:date,:libelle,:date_depo)');
+    'insert into citation (per_num,per_num_etu, cit_date, cit_libelle,cit_date_depo)
+      values(:num,:num_etu,:date,:libelle,:date_depo)');
     $req->bindValue(':num',$citation->getPerNum(),PDO::PARAM_INT);
     $req->bindValue(':date',$citation->getCitDate(),PDO::PARAM_STR );
     $req->bindValue(':num_etu',$citation->getPerNumEtu(),PDO::PARAM_INT );
@@ -22,11 +22,11 @@ public function add($citation){
 public function getListCitationPasNotées($num_etu){
 
   $listeCitation =array();
-  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
-        FROM citation c left join vote v ON c.cit_num=v.cit_num
+  $sql='select c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+        from citation c left join vote v on c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
-        where cit_valide=1 and cit_date_valide is not null  and c.cit_num not in ( Select cit_num from vote where per_num ='.$num_etu.')
-        group by cit_personne_cité, cit_libelle, cit_date
+        where cit_valide=1 and cit_date_valide is not null and c.cit_num not in ( select cit_num from vote where per_num ='.$num_etu.')
+        group by cit_personne_cité, cit_libelle, cit_date,c.cit_num
         order by cit_date desc';
   $req= $this->db->query($sql);
 
@@ -41,11 +41,11 @@ public function getListCitationPasNotées($num_etu){
 public function getListCitationDejaNotées($num_etu){
 
   $listeCitation =array();
-  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
-        FROM citation c left join vote v ON c.cit_num=v.cit_num
+  $sql='select c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+        from citation c left join vote v on c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
-        where cit_valide=1 and cit_date_valide is not null and c.cit_num in ( Select cit_num from vote where per_num ='.$num_etu.')
-        group by cit_personne_cité, cit_libelle, cit_date
+        where cit_valide=1 and cit_date_valide is not null and c.cit_num in ( select cit_num from vote where per_num ='.$num_etu.')
+        group by cit_personne_cité, cit_libelle, cit_date, c.cit_num
         order by cit_date desc';
   $req= $this->db->query($sql);
 
@@ -60,9 +60,9 @@ public function getListCitationDejaNotées($num_etu){
 public function getAllListCitation(){
 
   $listeCitation =array();
-  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
-        FROM citation c join personne p on c.per_num=p.per_num
-        group by cit_personne_cité, cit_libelle, cit_date
+  $sql='select concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
+        from citation c join personne p on c.per_num=p.per_num
+        group by cit_personne_cité, cit_libelle, cit_date,c.cit_num
         order by cit_date desc';
   $req= $this->db->query($sql);
 
@@ -76,10 +76,10 @@ public function getAllListCitation(){
 
 public function getDetailCitation($cit_num){
 
-  $sql='SELECT concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
-        FROM citation c join personne p on c.per_num=p.per_num
+  $sql='select concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, c.cit_num
+        from citation c join personne p on c.per_num=p.per_num
         where c.cit_num ='.$cit_num.'
-        group by cit_personne_cité, cit_libelle, cit_date
+        group by cit_personne_cité, cit_libelle, cit_date, c.cit_num
         order by cit_date desc';
   $req= $this->db->query($sql);
 
@@ -118,14 +118,14 @@ public function getDatePlusAncienne(){
 public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,$cit_note_debut,$cit_note_fin){
 
   $listeCitation =array();
-  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
-        FROM citation c join vote v ON c.cit_num=v.cit_num
+  $sql='select c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date, avg(vot_valeur) as cit_moy_notes
+        from citation c join vote v on  c.cit_num=v.cit_num
                         join personne p on c.per_num=p.per_num
         where cit_valide=1
         and cit_date_valide is not null
         and c.per_num='.$per_num.'
         and cit_date between \''.$cit_date_debut.'\' and \''.$cit_date_fin.'\'
-        group by cit_personne_cité, cit_libelle, cit_date,c.cit_num
+        group by cit_personne_cité, cit_libelle, cit_date, c.cit_num
         having avg(vot_valeur) between '.$cit_note_debut.' and '.$cit_note_fin.'
         order by cit_date desc';
   $req= $this->db->query($sql);
@@ -141,10 +141,10 @@ public function getListRechercheCitation($per_num,$cit_date_debut,$cit_date_fin,
 public function getListCitationNonValides(){
 
   $listeCitation =array();
-  $sql='SELECT c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date
-        FROM citation c join personne p on c.per_num=p.per_num
+  $sql='select c.cit_num,concat(per_prenom,per_nom) as cit_personne_cité, cit_libelle, cit_date
+        from citation c join personne p on c.per_num=p.per_num
         where cit_valide=0
-        group by cit_personne_cité, cit_libelle, cit_date
+        group by cit_personne_cité, cit_libelle, cit_date, c.cit_num
         order by cit_date desc';
   $req= $this->db->query($sql);
 

@@ -2,7 +2,6 @@
 	$db = new Mypdo();
 	$personneManager = new PersonneManager($db);
 	$nbPersonnes = $personneManager->nbpersonnes();
-	echo 'Actuellement ' . $nbPersonnes . ' personnes enregistrées.'
 ?>
 
 <h1>Supprimer des personnes enregistrées</h1>
@@ -11,7 +10,7 @@
  <tr>
 	 <th>Nom</th>
 	 <th>Prenom</th>
-	 <th>Modifier</th>
+	 <th>Supprimer</th>
 </tr>
 
 <?php

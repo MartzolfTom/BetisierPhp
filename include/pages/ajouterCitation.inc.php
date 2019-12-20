@@ -60,7 +60,6 @@ if (empty($_POST['cit_libelle'])) {
                'cit_date_depo' => $_POST['cit_date'],);
 
   $citation = new Citation($tab);
-  print_r($tab);
   $managerCitation->add($citation);
   echo "La citation a été ajouté";
   }

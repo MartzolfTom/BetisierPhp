@@ -123,7 +123,7 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 <?php } else {
 
 	header("Refresh: 2; url=index.php?page=2");?>
-	Vous n'avez pas rentré les champs correctement, ou un login déjà existant !
+	Vous n'avez pas rentré les champs correctement !
 	Redirection dans 2 secondes
 
 <?php } ?>

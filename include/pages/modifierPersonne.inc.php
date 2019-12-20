@@ -78,8 +78,8 @@ if(empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_nu
         <input type="submit" value="Valider">
       </form>
 
-    <?php } ?>
-  }
+    <?php }
+  }?>
 
 <!--Apres avoir valider l'etudiant, on modifie dans les tables personne et etudiant les donnes-->
 <?php } else if (!empty($_POST['div_num'])){
