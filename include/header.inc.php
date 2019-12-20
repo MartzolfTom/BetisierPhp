@@ -23,6 +23,7 @@ if (empty($_SESSION['per_num'])) {
 </head>
 	<body>
 	<div id="header">
+    <img src="image/yoda.gif" width="250" height="125" id="yoda" frameBorder="0"></img>
 		<div id="connect">
       <?php
       if (empty($_SESSION['per_num'])) {
