@@ -16,8 +16,8 @@ $nb_alea2 = rand(1, 9);
 ?>
 
 <form action="#" method="post">
-  Nom d'utilisateur : <input type="text" name="per_login" value="MichouDu87"> <br/><br/>
-  Mot de passe :      <input type="password" name="pwd" value="Rahnon"> <br/><br/>
+  Nom d'utilisateur : <input type="text" name="per_login" value="Walter"> <br/><br/>
+  Mot de passe :      <input type="password" name="pwd" value=""> <br/><br/>
   <img src="image/nb/<?php echo $nb_alea1 ?>.jpg" alt="premierNombre"> +
   <img src="image/nb/<?php echo $nb_alea2 ?>.jpg" alt="secondNombre"> =
   <input type="text" name="resultat" value=""> <br/><br/>

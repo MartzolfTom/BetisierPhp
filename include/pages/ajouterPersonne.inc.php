@@ -11,12 +11,12 @@ if (empty($_POST['fonction']) && empty($_POST['div_num']) && empty($_POST['dep_n
 
 	<h1>Ajouter une personne</h1>
 	<form action="#" method="post">
-		Nom : <input type="text" name="per_nom" value="Mare"> <br/> <br/>
-		Prénom : <input type="text" name="per_prenom" value="Dorian"> <br/> <br/>
-		Téléphone : <input type="text" name="per_tel" value="0629107479"> <br/> <br/>
-		Mail : <input type="text" name="per_mail" value="dorianmare@yahoo.fr"> <br/> <br/>
-		Login : <input type="text" name="per_login" value="MichouDu87"> <br/> <br/>
-		Mot de passe : <input type="password" name="per_pwd" value="Rahnon"> <br/> <br/>
+		Nom : <input type="text" name="per_nom" value=""> <br/> <br/>
+		Prénom : <input type="text" name="per_prenom" value=""> <br/> <br/>
+		Téléphone : <input type="text" name="per_tel" value=""> <br/> <br/>
+		Mail : <input type="text" name="per_mail" value=""> <br/> <br/>
+		Login : <input type="text" name="per_login" value=""> <br/> <br/>
+		Mot de passe : <input type="password" name="per_pwd" value=""> <br/> <br/>
 		Catégorie : <input type="radio" name="fonction" value="etu"> Etudiant
 		<input type="radio" name="fonction" value="sal"> Salarie <br/> <br/>
 		<input type="submit" value="Valider">
